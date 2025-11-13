@@ -1,0 +1,81 @@
+#root {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: hsl(0, 0%, 0%);
+    color: hsl(0, 0%, 96%);
+}
+
+:root {
+    --clr-neutral-600: hsl(0, 0%, 66%);
+    --clr-neutral-650: hsl(0, 0%, 21%);
+    --clr-neutral-700: hsl(212, 10.5%, 15.7%);
+    --clr-neutral-750: hsl(217, 11%, 14%);
+    --clr-neutral-800: hsl(0, 0%, 7.1%);
+
+
+    --clr-neutral-700-hover: hsl(212, 10.5%, 25.7%);
+
+
+    --clr-border-600: hsl(0, 1.7%, 47.5%);
+    --clr-border-700: hsl(0, 1.6%, 36.3%);
+    --clr-border-800: hsl(0, 1.2%, 25.1%);
+    --clr-border-900: hsl(0, 0%, 15.1%);
+
+    --clr-primary-500: hsl(226, 93%, 79%);
+    --clr-primary-600: hsl(226, 100%, 76%);
+
+    --clr-error-600: hsl(355, 100%, 59%);
+    --clr-button-600: hsl(233, 93%, 63%);
+    --clr-button-800-focused: hsl(233, 91%, 61%);
+    --clr-button-900-focused: hsl(233, 89%, 59%);
+    --clr-anchor-600: hsl(227, 100%, 72%);
+    --clr-anchor-800-focused: hsl(228, 90%, 64%);
+
+}
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: subpixel-antialiased !important;
+}
+
+img,
+video,
+canvas {
+    display: block;
+    max-width: 100%;
+}
+
+
+input,
+button,
+label,
+a {
+    all: unset;
+}
+
+ul {
+    list-style: none;
+}
+
+button,
+a,
+svg {
+    cursor: pointer;
+}
+
+body {
+    height: 100vh;
+    line-height: 1.2;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    background-color: hsl(0, 0%, 0%);
+}
+
+.topLoadingBar {
+    background: #FEDA75 !important;
+    background: linear-gradient(270deg, rgba(254, 218, 117, 1) 0%, rgba(250, 126, 30, 1) 25%, rgba(214, 41, 118, 1) 50%, rgba(150, 47, 191, 1) 75%, rgba(79, 91, 213, 1) 100%) !important;
+}

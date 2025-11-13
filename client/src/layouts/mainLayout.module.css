@@ -1,0 +1,28 @@
+.mainLayoutWrapper {
+    height: 100%;
+}
+
+.main {
+    width: calc(100% - 220px - 1.6rem);
+    margin-left: auto;
+    height: 100%;
+    overflow-y: auto;
+
+    >* {
+        padding-top: 1.5rem;
+        margin: auto;
+        max-width: 990px;
+    }
+}
+
+.smallChildrenWidth>*:first-child {
+    max-width: 935px;
+}
+
+
+
+@media(width>1920px) {
+    .main {
+        width: calc(100% - 314px - 1.6rem);
+    }
+}

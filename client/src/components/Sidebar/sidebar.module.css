@@ -1,0 +1,610 @@
+.sidebarWrapper {
+    padding: 1.5rem .8rem;
+    border-right: 1.5px solid var(--clr-border-900);
+    height: 100%;
+    background-color: black;
+
+    position: fixed;
+    z-index: 10;
+    display: flex;
+}
+
+@keyframes loadingCircleAnimation {
+    from {
+        rotate: 0deg;
+    }
+
+    to {
+        rotate: 360deg;
+    }
+}
+
+
+.sidebar {
+    transition: all .3s ease-in-out;
+    width: 220px;
+    font-weight: 700;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+
+    .logoWrapper {
+        padding-left: .8rem;
+        height: 38px;
+        display: flex;
+        align-items: center;
+        position: relative;
+    }
+}
+
+.instaWordmark {
+    height: 100%;
+}
+
+.instaLogo {
+    position: absolute;
+    margin-left: .15rem;
+    width: 0px;
+    transition: all .25s ease-in-out;
+}
+
+.list {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+.lowerList{
+    margin-top: 7.5rem;
+}
+
+.listItem {
+    height: 48px;
+    display: flex;
+    font-weight: 400;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all .2s linear;
+}
+
+.listItem:hover {
+    background-color: hsl(0, 0%, 10%);
+}
+
+.listItem:active {
+    transition: none;
+    scale: .98;
+}
+
+.listItem>* {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    padding: .8em .5em .8em .8em;
+    gap: .8rem;
+
+
+    >div {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+    }
+
+    img {
+        width: 24px;
+    }
+}
+
+.avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.activeListItem {
+    font-weight: 700;
+    filter: brightness(1.1);
+}
+
+/* Search Button */
+
+
+
+.openSearchMenu {
+    border: none;
+
+    .sidebar {
+        width: calc(80px - 1.6rem);
+    }
+
+
+    .searchMenu {
+        display: flex;
+    }
+
+    .listItemText,
+    .instaWordmark {
+        display: none;
+    }
+
+    .instaLogo {
+        width: 22px;
+    }
+}
+
+
+/* Seach Menu */
+.searchMenu {
+    display: none;
+    width: 420px;
+    height: 100%;
+    padding-inline: 1.5rem 0;
+
+    background-color: black;
+
+    flex-direction: column;
+    gap: 1.5rem;
+
+
+
+}
+
+.searchHeader {
+    display: grid;
+    row-gap: 2.5rem;
+
+    h2 {
+        padding-left: .5rem;
+        font-weight: 600;
+    }
+}
+
+.searchBarWrapper {
+    border-radius: 8px;
+    position: relative;
+    background-color: var(--clr-neutral-650);
+    color: var(--clr-neutral-600);
+
+    .svg {
+        position: absolute;
+        top: 50%;
+        translate: 0 -50%;
+
+        &:first-child {
+            pointer-events: none;
+            left: .8rem;
+
+        }
+
+        &:last-child {
+            right: .5rem;
+            display: none;
+        }
+
+        &:last-child:hover {
+            transition: all .1s linear;
+            scale: 1.05;
+
+            >svg {
+                fill: rgb(223, 222, 222);
+            }
+        }
+    }
+
+    &:focus-within {
+        .searchBar {
+            padding-inline: 1em 2rem;
+            color: white;
+        }
+
+        .svg {
+            &:first-child {
+                display: none;
+            }
+
+            &:last-child {
+                display: flex;
+                align-items: center;
+            }
+
+        }
+    }
+}
+
+
+
+.searchBar {
+    box-sizing: border-box;
+    /* ###DOUBT display block won't work */
+    width: 100%;
+    padding: .6em 2.5em;
+
+    &::placeholder {
+        color: var(--clr-neutral-600);
+    }
+}
+
+.searchResultsWrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.emptySearchQuery {
+    border-top: 1px solid var(--clr-border-800);
+    padding-block: 1.2rem;
+}
+
+.searchResultsHeader {
+    display: flex;
+    justify-content: space-between;
+    padding-inline: 1.2rem;
+
+    span {
+        font-size: 1rem;
+    }
+
+    button {
+        color: var(--clr-primary-600);
+
+    }
+}
+
+
+.searchResults {
+    display: flex;
+    flex-direction: column;
+}
+
+.searchResult {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    height: 60px;
+    padding: .2rem .6rem;
+    border-radius: 10px;
+    transition: all .15s linear;
+
+
+    &:hover {
+        background-color: var(--clr-neutral-750);
+    }
+
+
+    >div:first-child {
+        border-radius: 50%;
+        overflow: hidden;
+        width: 50px;
+        height: 50px;
+        flex-shrink: 0;
+
+    }
+
+    img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+    }
+
+    .oneLineText {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+
+    }
+}
+
+.searchedUserData {
+    display: flex;
+    flex-direction: column;
+    gap: .2rem;
+    max-height: 100%;
+    flex: 1;
+
+    .extraUserDetails {
+        display: flex;
+        gap: 1.2rem;
+        color: var(--clr-neutral-600);
+        font-size: 13px;
+        font-weight: 400;
+
+
+        p {
+            max-width: 50%;
+            min-width: fit-content;
+        }
+
+        ul {
+            flex-grow: 1;
+            list-style: disc;
+        }
+
+    }
+}
+
+
+
+.noResults {
+    flex: 1;
+    display: grid;
+    place-content: center;
+    color: var(--clr-neutral-600);
+
+}
+
+
+/* Create New Post */
+.createNewPost {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    padding: 1rem;
+    backdrop-filter: brightness(0.3);
+
+    /* display: flex; */
+    display: none;
+    flex-direction: column;
+
+
+    .closeIcon {
+        display: block;
+        margin-left: auto;
+        cursor: pointer;
+        transition: all .2s linear;
+
+        &:hover {
+            scale: 1.05;
+        }
+    }
+
+    .disabled {
+        pointer-events: none;
+    }
+
+    .dialogBoxWrapper {
+        flex-grow: 1;
+        display: grid;
+        place-content: center;
+    }
+
+    .dialogBox {
+        width: min(620px, 90vw);
+        height: min(750px, 80vh);
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        border-radius: 30px;
+        overflow: hidden;
+
+
+
+
+        >div {
+            font-weight: 600;
+            background-color: black;
+            padding: .5em 1.5em;
+            border-bottom: .1px solid var(--clr-border-800);
+
+            display: flex;
+            justify-content: space-between;
+
+
+
+            p {
+                flex-grow: 1;
+                justify-content: center;
+                text-align: center;
+                margin: auto;
+            }
+
+            >* {
+                flex-basis: 50px;
+                display: flex;
+                align-items: center;
+            }
+        }
+
+        .uploadFile {
+            color: var(--clr-primary-600);
+            font-size: 14px;
+            justify-content: end;
+
+            &:hover {
+                text-decoration: underline;
+                color: var(--clr-primary-500);
+            }
+        }
+
+
+        .previewContent {
+            flex-grow: 1;
+
+            /* ###Come back here and make it better for diff aspect ratios */
+            object-fit: cover;
+            width: 100%;
+            background-color: var(--clr-neutral-800);
+        }
+
+
+        >section {
+            flex-grow: 1;
+            display: grid;
+            place-content: center;
+            place-items: center;
+            gap: 1rem;
+            background-color: var(--clr-neutral-750);
+            padding: 2rem;
+        }
+
+        .postUploadPlaceholder {
+            >img {
+                width: 100px;
+            }
+
+            >p {
+                font-size: 1.2rem;
+                margin-bottom: .2rem;
+            }
+        }
+
+
+        .uploadingStateSection>p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            opacity: 0;
+            translate: 0 100%;
+            transition: all .3s ease-out;
+        }
+
+        .uploadingLoaderCircle {
+            width: 95px;
+            height: 95px;
+            display: grid;
+            place-content: center;
+            border-radius: 50%;
+            background: #FEDA75;
+            background: linear-gradient(135deg, rgba(254, 218, 117, 1) 10%, rgba(250, 126, 30, 1) 25%, rgba(214, 41, 118, 1) 60%, rgba(150, 47, 191, 1) 80%, rgba(79, 91, 213, 1) 100%);
+            position: relative;
+
+
+
+        }
+
+        .tickMarkWrapper {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            translate: -50% -50%;
+
+            width: 88px;
+            height: 88px;
+            border-radius: 50%;
+            background-color: var(--clr-neutral-750);
+
+            display: grid;
+            place-content: center;
+        }
+
+        .loading {
+            animation: loadingCircleAnimation .5s linear infinite;
+        }
+
+        .reverseLoading {
+            animation: loadingCircleAnimation .5s linear infinite reverse;
+        }
+
+        .tickMark {
+            width: 25px;
+            height: 45px;
+            rotate: 45deg;
+            overflow: hidden;
+            position: relative;
+            bottom: 7px;
+
+        }
+
+
+        .tickMark::before {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            bottom: -94%;
+            background: #FA7E1E;
+            background: linear-gradient(90deg, rgba(250, 126, 30, 1) 0%, rgba(214, 41, 118, 1) 55%);
+        }
+
+        .tickMark::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            right: -89%;
+            background: #FA7E1E;
+            background: linear-gradient(0deg, rgba(250, 126, 30, 1) 0%, rgba(214, 41, 118, 1) 0%);
+        }
+
+        .tickMarkLeftAnimation::before {
+            animation: tickMarkLeft 3s ease-in-out infinite;
+        }
+
+        .tickMarkRightAnimation::after {
+            animation: tickMarkRight 3s ease-in-out infinite;
+        }
+    }
+}
+
+@keyframes tickMarkLeft {
+    0% {
+        left: -100%;
+    }
+
+    10% {
+        left: 0%;
+    }
+
+}
+
+@keyframes tickMarkRight {
+    0% {
+        bottom: -100%;
+    }
+
+    10% {
+        bottom: -100%;
+    }
+
+    20% {
+        bottom: 0%;
+    }
+}
+
+
+.selectFile {
+    color: white;
+    background-color: var(--clr-button-600);
+    font-size: 14px;
+    gap: .5rem;
+    font-weight: 600;
+    border-radius: 10px;
+
+
+    input {
+        display: none;
+    }
+
+    label {
+        display: block;
+        cursor: pointer;
+        padding: .5rem 1.2rem;
+
+    }
+
+
+
+    &:hover {
+        background-color: var(--clr-button-800-focused);
+    }
+}
+
+
+@media (width>1920px) {
+    .sidebar {
+        width: 314px;
+    }
+}
