@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AuthContext } from './../hooks/useAuth'
-import axios from 'axios'
 import LoadingPage from '../pages/Extras/LoadingPage'
-import toast from 'react-hot-toast'
+import { unAuthApi } from '../api/axios'
 
 
 export const AuthProvider = ({ children }) => {
@@ -13,10 +12,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const refreshSession = async () => {
             try {
-                const response = await axios.post('/auth/refresh', {}, {
-                    withCredentials: true,
-                    baseURL: `${import.meta.env.VITE_API_BASE_URL}`
-                })
+                const response = await unAuthApi.post('/auth/refresh')
                 const { data: { accessToken, user } } = response.data
                 setToken(accessToken)
                 setUser(user)

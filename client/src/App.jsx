@@ -21,7 +21,7 @@ function App() {
       apiEvents.off('end', complete)
     }
 
-  }, [location])
+  }, [location.pathname])
 
   return (
     <>

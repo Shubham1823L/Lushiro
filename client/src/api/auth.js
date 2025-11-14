@@ -1,9 +1,8 @@
-import axios from "axios"
-import { api } from "./axios"
+import { api, unAuthApi } from "./axios"
 
 export const login = async (email, password) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/login`, { email, password },{withCredentials:true})
+        const response = await unAuthApi.post(`/auth/login`, { email, password })
         return response
     } catch (error) {
         return error.response
@@ -20,7 +19,7 @@ export const logout = async () => {
 export const signup = async (data) => {
 
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/signup`, data, { withCredentials: true })
+        const response = await unAuthApi.post(`/auth/signup`, data)
         return response
     } catch (error) {
         return error.response
@@ -30,7 +29,7 @@ export const signup = async (data) => {
 
 export const verifyOtp = async (otp) => {
     try {
-        const response = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/auth/signup/verify`, { otp }, { withCredentials: true })
+        const response = await unAuthApi.post(`/auth/signup/verify`, { otp })
         return response
     } catch (error) {
         return error.response

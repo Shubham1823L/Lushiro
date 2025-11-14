@@ -12,6 +12,15 @@ export const api = axios.create({
 })
 
 
+export const unAuthApi = axios.create({
+    baseURL:baseUrl,
+    withCredentials:true
+})
+  
+
+
+
+
 export const useAxiosInterceptors = () => {
 
     const { token, updateToken } = useAuth()
@@ -38,7 +47,7 @@ export const useAxiosInterceptors = () => {
 
                 originalRequest.hasRetried = true
                 try {
-                    const response = await axios.post(`${baseUrl}/auth/refresh`, {}, { withCredentials: true })
+                    const response = await unAuthApi.post(`/auth/refresh`)
                     const newToken = response.data.data?.accessToken
                     updateToken(newToken)
 
