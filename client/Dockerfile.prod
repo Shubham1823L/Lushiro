@@ -1,0 +1,28 @@
+FROM node:24-slim AS builder
+
+WORKDIR /build
+
+COPY package*.json .
+
+RUN npm ci --omit=dev
+
+RUN npm install
+
+COPY . .
+
+ENV VITE_API_BASE_URL=http://localhost:8080/api
+
+RUN npm run build
+
+
+
+
+FROM node:24-slim AS runner
+
+WORKDIR /app
+
+RUN npm install -g serve
+
+COPY --from=builder /build/dist ./dist
+
+CMD [ "serve","-s","dist","-l","3000" ]

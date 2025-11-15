@@ -1,0 +1,49 @@
+services:
+  
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    image: lushiro_client:dev
+    container_name: lushiro_dev_client
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./client/src:/app/src:ro
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    image: lushiro_server:dev
+    container_name: lushiro_dev_server
+    ports:
+      - "1823:1823"
+    env_file:
+      - ./server/.env
+    environment:
+      - PORT=1823
+      - CLIENT_URL=http://localhost:5173
+      - MONGO_URI=mongodb://db:27017/lushiro
+    volumes:
+      - ./server:/app:ro
+      - /app/node_modules
+    depends_on:
+      - db
+  
+
+  db:
+    image: mongo:7
+    container_name: lushiro_dev_db
+    volumes:
+      - mongo_dev_data:/data/db
+    ports:
+      - "27017:27017"
+    
+
+volumes:
+  mongo_dev_data:
+
+    
