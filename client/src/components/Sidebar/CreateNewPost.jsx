@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../hooks/useAuth';
 import toast from 'react-hot-toast';
+import { ImagePlus } from 'lucide-react'
 
 const CreateNewPost = ({ createNewPostRef, setMyPosts }) => {
     const navigate = useNavigate()
@@ -94,8 +95,8 @@ const CreateNewPost = ({ createNewPostRef, setMyPosts }) => {
                             </> :
                             <>
                                 <section className={styles.postUploadPlaceholder}>
-                                    <img src="/www.instagram.com/image&video.svg" alt="image&videoIcon" />
-                                    <p>Drag photos and videos here</p>
+                                    <ImagePlus size={64} />
+                                    <p>Upload photos and videos here</p>
                                     <div className={styles.selectFile}>
                                         <label htmlFor="fileUpload">Select from Computer</label>
                                         <input onChange={handleFileSelect} id='fileUpload' type="file" accept='image/*, video/*' />

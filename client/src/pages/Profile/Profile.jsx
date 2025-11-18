@@ -11,7 +11,7 @@ import { fetchUserfromAPI } from '../../api/userQuery';
 import { useAuth } from '../../hooks/useAuth';
 import LoadingPage from '../Extras/LoadingPage';
 import FollowBtn from './FollowBtn';
-
+import {Cog} from 'lucide-react'
 
 const Profile = () => {
     const params = useParams()
@@ -33,7 +33,7 @@ const Profile = () => {
             const { status, data } = await fetchUserfromAPI(params.username)
             if (status != 200) return console.error("error")
 
-            const {user} = data.data
+            const { user } = data.data
             setUser(user)
 
             //Sync initial followersCount value
@@ -70,10 +70,10 @@ const Profile = () => {
                                         <FollowBtn setFollowersCount={setFollowersCount} username={user.username} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
                                     }
                                     <button className={styles.darkBtnBase}>
-                                        View Archive
+                                       Coming Soon!
                                     </button>
                                     <button className={styles.settings}>
-                                        <img src="/www.instagram.com/settings.svg" alt="settingsIcon" />
+                                        <Cog size={24} />
                                     </button>
                                 </div>
                             </div>

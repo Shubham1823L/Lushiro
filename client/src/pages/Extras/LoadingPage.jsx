@@ -6,11 +6,11 @@ const LoadingPage = () => {
         <>
             <div className={styles.loadingPageWrapper}>
                 <main className={styles.main}>
-                    <img src="/01 Static Glyph/01 Gradient Glyph/Instagram_Glyph_Gradient.svg" alt="instaLogo" className={styles.instaLogo} />
+                    <img src="cool.png" alt="lushrioLogo" className={styles.lushiroLogo} />
                 </main>
                 <footer className={styles.footer}>
-                    <p>from</p>
-                    <img src="/Meta.png" alt="metaLogo" className={styles.metaLogo} />
+                    <p>by</p>
+                   <p className={styles.shubham}>Shubham</p>
                 </footer>
             </div>
         </>
