@@ -3,7 +3,6 @@ import styles from './home.module.css'
 import Story from './Story'
 import Post from './Post';
 import { apiFetchFeed } from '../../api/posts';
-import toast from 'react-hot-toast'
 
 const Home = () => {
   const [posts, setPosts] = useState([])

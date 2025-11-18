@@ -14,7 +14,7 @@ export const toggleFollow = async (req, res) => {
         follower.followingCount++
         await follower.save()
         await toBeFollowed.save()
-        return res.success(200, "OK", `Now following: ${toBeFollowed.username}`)
+        return res.success(200, { user: follower }, `Now following: ${toBeFollowed.username}`)
     }
     else {
         // Alerady following, unfollow now
@@ -24,7 +24,7 @@ export const toggleFollow = async (req, res) => {
         follower.followingCount--
         await follower.save()
         await toBeFollowed.save()
-        return res.success(200, "OK", `Unfollowed: ${toBeFollowed.username}`)
+        return res.success(200, { user: follower }, `Unfollowed: ${toBeFollowed.username}`)
     }
 
 }

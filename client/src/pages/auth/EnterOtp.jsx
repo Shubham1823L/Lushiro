@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import TextField from '../../components/TextField/TextField'
 import { Link, useNavigate } from 'react-router-dom'
 import Footer from '../../components/Footer/Footer'
-import { RiFacebookCircleFill } from "react-icons/ri";
 import { verifyOtp } from '../../api/auth'
 import { useAuth } from '../../hooks/useAuth'
 
@@ -41,7 +40,7 @@ const EnterOtp = () => {
             <main className={loginStyles.hero}>
                 <div className={clsx(styles.formWrapper, loginStyles.formWrapper)}>
                     <form className={styles.form}>
-                        <h1><img src="/instagram-wordmark.svg" alt="nameLogo" /></h1>
+                        <h1 className={styles.wordmark}>Lushiro</h1>
 
 
                         <div className={clsx(styles.formFields, loginStyles.formFields)}>
@@ -51,7 +50,7 @@ const EnterOtp = () => {
                         <button onClick={handleSubmit} type='submit' className={clsx(!clickable && styles.disabled, styles.btnBase)}>Next</button>
                         <Link to={'#'} disabled className={loginStyles.forgotPassword}>Resend OTP</Link>
 
-                        <div className={styles.lineBreakWrapper}>
+                        {/* <div className={styles.lineBreakWrapper}>
                             <div ></div>
                             <p>OR</p>
                             <div ></div>
@@ -60,7 +59,7 @@ const EnterOtp = () => {
 
                         <a href="#" disabled className={loginStyles.loginWithFacebook}>
                             <RiFacebookCircleFill size={24} /> Log in with Facebook
-                        </a>
+                        </a> */}
 
                     </form>
                 </div>

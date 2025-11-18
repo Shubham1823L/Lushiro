@@ -14,9 +14,8 @@ const FollowBtn = ({ username, isFollowing, setIsFollowing, setFollowersCount })
             const increment = isFollowing ? -1 : 1
             setFollowersCount(count => count + increment)
             setIsFollowing(bool => !bool)
-            //Syncing user for frontend
+            //Syncing user for frontend to avoid bugs
             updateUser(data.user)
-
             return
         }
 
