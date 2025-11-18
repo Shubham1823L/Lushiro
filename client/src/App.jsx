@@ -25,7 +25,7 @@ function App() {
 
   return (
     <>
-      <LoadingBar ref={ref} color='red' height={3} className='topLoadingBar' />
+      <LoadingBar ref={ref} height={3} className='topLoadingBar' />
       <AppRouter />
     </>
   )

@@ -2,7 +2,7 @@ import React from 'react'
 import styles from './footer.module.css'
 import clsx from 'clsx'
 const Footer = ({ className }) => {
-    const footerLinks = ["About", "Blog", "Jobs", "Help", "API", "Privacy", "Terms", "Locations", "Contact uploading and non-users"]
+    const footerLinks = ["About", "Blog", "Jobs", "Help", "API", "Privacy?", "Terms?","What?", "I won't give my Location", "Contact me for idk what"]
 
     return (
         <footer className={clsx(className, styles.footer)}>
@@ -16,7 +16,7 @@ const Footer = ({ className }) => {
                     <option value="0">English (UK)</option>
                     <option value="1">English</option>
                 </select>
-                <p>&copy; 2025 Instagram From Meta</p>
+                <p>&copy; For being better?</p>
             </div>
         </footer>
     )

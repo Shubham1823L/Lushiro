@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 import styles from './sidebar.module.css'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import { GoHomeFill } from "react-icons/go";
 import { CiSearch } from "react-icons/ci";
 import { MdOutlineExplore } from "react-icons/md";
@@ -12,7 +12,7 @@ import clsx from 'clsx'
 import CreateNewPost from './CreateNewPost';
 import SearchMenu from './SearchMenu';
 import { useAuth } from '../../hooks/useAuth';
-import { Menu } from 'lucide-react'
+import { Cog, HardHat } from 'lucide-react'
 
 const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
 
@@ -31,8 +31,8 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
             <div className={styles.sidebar}>
 
                 <NavLink to={"/"} className={styles.logoWrapper}>
-                    <img src="/instagram-wordmark.svg" alt="instaWordmark" className={styles.instaWordmark} />
-                    <img src="/01 Static Glyph/02 White Glyph/Instagram_Glyph_White.svg" alt="instaLogo" className={styles.instaLogo} />
+                    <p className={styles.wordmark}>Lushiro</p>
+                    <img src="cool.png" alt="lushiroLogo" className={styles.lushiroLogo} />
                 </NavLink>
 
                 <ul className={styles.list}>
@@ -70,26 +70,29 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
                             <span className={styles.listItemText}>Explore</span>
                         </SidebarNavLink>
                     </li>
-                    <li className={styles.listItem}>
+                    {/* <li className={styles.listItem}>
                         <SidebarNavLink to={"/"}>
                             <div><img src="/www.instagram.com/reels.svg" alt="reelsIcon" /></div>
                             <span className={styles.listItemText}>Reels</span>
                         </SidebarNavLink>
-                    </li>
+                    </li> */}
                     <li className={styles.listItem}>
-                        <SidebarNavLink to={"/"}>
+                        <SidebarNavLink to={"/pupu"}>
                             <div>
-                                <PiPaperPlaneTiltBold size={26} />
+                                {/* <PiPaperPlaneTiltBold size={26} /> */}
+                                <HardHat size={28} />
                             </div>
-                            <span className={styles.listItemText}>Messages</span>
+                            <span className={styles.listItemText}>Coming Soon!</span>
                         </SidebarNavLink>
                     </li>
                     <li className={styles.listItem}>
                         <div>
                             <div>
-                                <FaRegHeart size={24} />
+                                {/* <FaRegHeart size={24} /> */}
+                                <HardHat size={28} />
+
                             </div>
-                            <span className={styles.listItemText}>Notifications</span>
+                            <span className={styles.listItemText}>Not Coming Soon!</span>
                         </div>
                     </li>
                     <li className={styles.listItem}>
@@ -110,26 +113,26 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
                     </li>
                 </ul>
                 <div>
-                    <ul className={clsx(styles.list,styles.lowerList)}>
+                    <ul className={clsx(styles.list, styles.lowerList)}>
                         <li className={styles.listItem}>
                             <button>
                                 <div>
-                                    <Menu size={28} />
+                                    <Cog size={28} />
                                 </div>
-                                <span>
-                                    More
+                                <span className={styles.listItemText}>
+                                    Settings
                                 </span>
                             </button>
                         </li>
                         <li className={styles.listItem}>
-                            <button>
+                            <Link to={'/pupu'}>
                                 <div>
-                                    <img src="/www.instagram.com/blocks.svg" alt="blocksIcon" />
+                                    <HardHat size={28} />
                                 </div>
-                                <span>
-                                    Also from Meta
+                                <span className={styles.listItemText}>
+                                    Coming Soon!
                                 </span>
-                            </button>
+                            </Link>
                         </li>
                     </ul>
                 </div>

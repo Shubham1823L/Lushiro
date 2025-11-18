@@ -22,8 +22,8 @@
     --clr-border-800: hsl(0, 1.2%, 25.1%);
     --clr-border-900: hsl(0, 0%, 15.1%);
 
-    --clr-primary-500: hsl(226, 93%, 79%);
-    --clr-primary-600: hsl(226, 100%, 76%);
+    --clr-primary-500: hsl(319, 93%, 79%);
+    --clr-primary-600: hsl(319, 100%, 76%);
 
     --clr-error-600: hsl(355, 100%, 59%);
     --clr-button-600: hsl(329, 97%, 48%);
@@ -76,6 +76,6 @@ body {
 }
 
 .topLoadingBar {
-    background: #FEDA75 !important;
-    background: linear-gradient(270deg, rgba(254, 218, 117, 1) 0%, rgba(250, 126, 30, 1) 25%, rgba(214, 41, 118, 1) 50%, rgba(150, 47, 191, 1) 75%, rgba(79, 91, 213, 1) 100%) !important;
+    background: #ff0015 !important;
+    background: linear-gradient(270deg, rgba(255, 0, 21, 1) 0%, rgba(250, 125, 30, 1) 25%, rgba(255, 221, 0, 1) 50%, rgba(237, 19, 110, 1) 75%, rgba(84, 19, 214, 1) 100%) !important;
 }

@@ -21,7 +21,7 @@
 
 
 .sidebar {
-    transition: all .3s ease-in-out;
+    transition: all .15s linear;
     width: 220px;
     font-weight: 700;
     margin-top: 1rem;
@@ -33,30 +33,37 @@
     .logoWrapper {
         padding-left: .8rem;
         height: 38px;
+        width: fit-content;
         display: flex;
         align-items: center;
         position: relative;
     }
 }
 
-.instaWordmark {
-    height: 100%;
+
+.wordmark {
+    font-family: "Pacifico", cursive;
+    color: hsl(0, 0%, 98%);
+    font-size: 3rem;
+    font-weight: 400;
+    text-align: center;
 }
 
-.instaLogo {
-    position: absolute;
-    margin-left: .15rem;
-    width: 0px;
-    transition: all .25s ease-in-out;
+.lushiroLogo {
+    display: none;
+    position: relative;
+    left: -2px;
 }
 
 .list {
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     gap: .5rem;
+
 }
 
-.lowerList{
+.lowerList {
     margin-top: 7.5rem;
 }
 
@@ -67,6 +74,7 @@
     border-radius: 10px;
     cursor: pointer;
     transition: all .2s linear;
+
 }
 
 .listItem:hover {
@@ -85,12 +93,20 @@
     padding: .8em .5em .8em .8em;
     gap: .8rem;
 
+    >span {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+    }
 
     >div {
         display: flex;
         justify-content: center;
         align-items: center;
         width: 28px;
+        flex-shrink: 0;
     }
 
     img {
@@ -127,12 +143,13 @@
     }
 
     .listItemText,
-    .instaWordmark {
+    .wordmark {
         display: none;
     }
 
-    .instaLogo {
-        width: 22px;
+    .lushiroLogo {
+        width: 32px;
+        display: block;
     }
 }
 
