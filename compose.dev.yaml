@@ -26,24 +26,9 @@ services:
     environment:
       - PORT=1823
       - CLIENT_URL=http://localhost:5173
-      - MONGO_URI=mongodb://db:27017/lushiro
+      - atlas = $$atlas
     volumes:
       - ./server:/app:ro
       - /app/node_modules
-    depends_on:
-      - db
-  
-
-  db:
-    image: mongo:7
-    container_name: lushiro_dev_db
-    volumes:
-      - mongo_dev_data:/data/db
-    ports:
-      - "27017:27017"
-    
-
-volumes:
-  mongo_dev_data:
 
     

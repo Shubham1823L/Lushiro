@@ -12,21 +12,13 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: .3rem;
     background-color: var(--clr-neutral-800);
     border: 1px solid var(--clr-border-700);
-    border-radius: 2px;
+    border-radius: 20px;
+    padding-right: .6rem;
 
-    &:focus-within {
-        .placeholder {
-            font-size: 10px;
-            top: .6rem;
-        }
-    }
 
-    .textField:not(:placeholder-shown)+.placeholder {
-        font-size: 10px;
-        top: .6rem;
-    }
 }
 
 .errorBorder {
@@ -36,7 +28,7 @@
 .placeholder {
     position: absolute;
     color: var(--clr-neutral-600);
-    left: .6rem;
+    left: 1rem;
     top: 50%;
     transform: translate(0, -50%);
     font-size: 12px;
@@ -49,8 +41,23 @@
     box-sizing: border-box;
     font-size: 12px;
     color: white;
-    padding: 1rem .8rem .4rem .6rem;
+    padding: 1rem 0 .4rem 1rem;
     width: 100%;
+
+    &:focus-within+.placeholder {
+        font-size: 10px;
+        top: .6rem;
+
+        /* This is needed to apply styles when focused in but value is empty */
+    }
+
+
+    &:not(:placeholder-shown)+.placeholder {
+        font-size: 10px;
+        top: .6rem;
+
+        /* This is needef when focused out but value is non-empty  */
+    }
 
     &::placeholder {
         visibility: hidden;
@@ -61,5 +68,24 @@
     color: var(--clr-error-600);
     margin-bottom: .5rem;
     font-size: 10px;
-    padding-left: .6rem;
+    padding-left: 1rem;
+}
+
+.errorLogo {
+    flex-shrink: 0;
+
+}
+
+.eye {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: hsl(0, 0%, 70%);
+    transition: all .15s linear;
+    margin-right: .2rem;
+
+    &:hover {
+        color: white;
+    }
 }

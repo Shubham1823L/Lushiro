@@ -66,7 +66,7 @@ const Login = () => {
             <main className={loginStyles.hero}>
                 <div className={clsx(styles.formWrapper, loginStyles.formWrapper)}>
                     <form className={styles.form}>
-                        <h1><img src="/instagram-wordmark.svg" alt="nameLogo" /></h1>
+                        <h1 className={styles.wordmark}>Lushiro</h1>
 
 
                         <div className={clsx(styles.formFields, loginStyles.formFields)}>
@@ -82,10 +82,10 @@ const Login = () => {
                         </div>
 
 
-                        <a href="#" disabled className={loginStyles.loginWithFacebook}>
+                        {/* <a href="#" disabled className={loginStyles.loginWithFacebook}>
                             <RiFacebookCircleFill size={24} /> Log in with Facebook
-                        </a>
-                        <Link to={'#'} disabled className={loginStyles.forgotPassword}>Forgotten your Password?</Link>
+                        </a> */}
+                        <Link to={'#'} disabled className={loginStyles.forgotPassword}>Forgot Password?</Link>
 
                     </form>
                 </div>

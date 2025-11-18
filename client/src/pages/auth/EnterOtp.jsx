@@ -18,7 +18,6 @@ const EnterOtp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         const value = (ref.current.value).trim()
-
         const response = await verifyOtp(value)
         if (response.status >= 400) return console.error("ERROR")
         const { user, accessToken } = response.data.data
@@ -29,7 +28,7 @@ const EnterOtp = () => {
     }
 
 
-    const handleBlur = () => {
+    const handleChange = () => {
         const value = (ref.current.value).trim()
         if (value.length === 6 && parseInt(value)) setClickable(true)
         else setClickable(false)
@@ -46,7 +45,7 @@ const EnterOtp = () => {
 
 
                         <div className={clsx(styles.formFields, loginStyles.formFields)}>
-                            <TextField type={"text"} placeholder={"Enter your OTP"} ref={ref} handleBlur={handleBlur} />
+                            <TextField type={"text"} placeholder={"Enter your OTP"} ref={ref} handleChange={handleChange} />
                         </div>
 
                         <button onClick={handleSubmit} type='submit' className={clsx(!clickable && styles.disabled, styles.btnBase)}>Next</button>

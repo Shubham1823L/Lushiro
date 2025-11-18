@@ -26,11 +26,11 @@
     --clr-primary-600: hsl(226, 100%, 76%);
 
     --clr-error-600: hsl(355, 100%, 59%);
-    --clr-button-600: hsl(233, 93%, 63%);
-    --clr-button-800-focused: hsl(233, 91%, 61%);
-    --clr-button-900-focused: hsl(233, 89%, 59%);
-    --clr-anchor-600: hsl(227, 100%, 72%);
-    --clr-anchor-800-focused: hsl(228, 90%, 64%);
+    --clr-button-600: hsl(329, 97%, 48%);
+    --clr-button-800-focused: hsl(329, 91%, 61%);
+    --clr-button-900-focused: hsl(329, 89%, 59%);
+    --clr-anchor-600: hsl(338, 100%, 50%);
+    --clr-anchor-800-focused: hsl(338, 100%, 66%);
 
 }
 

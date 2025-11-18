@@ -56,11 +56,11 @@ const Signup = () => {
             <main className={styles.hero}>
                 <div className={styles.formWrapper}>
                     <form className={styles.form}>
-                        <h1><img src="/instagram-wordmark.svg" alt="nameLogo" /></h1>
-                        <h2 className={styles.formHeading}>Sign up to see photos and videos from your friends.</h2>
-                        <button className={clsx(styles.btnBase, styles.disabled)}>
+                        <h1 className={styles.wordmark}>Lushrio</h1>
+                        <h2 className={styles.formHeading}>Sign up to capture and share your beautiful moments.</h2>
+                        {/* <button className={clsx(styles.btnBase, styles.disabled)}>
                             <ImFacebook2 size={18} /> Log in with Facebook
-                        </button>
+                        </button> */}
                         <div className={styles.lineBreakWrapper}>
                             <div ></div>
                             <p>OR</p>
@@ -72,8 +72,8 @@ const Signup = () => {
                             <FullNameField toggleValid={toggleValid} ref={refs.fullName} />
                             <UsernameField toggleValid={toggleValid} ref={refs.username} />
                         </div>
-                        <p>People who use our service may have uploaded your contact information to Instagram.
-                            <a href="https://www.facebook.com/help/instagram/261704639352628"> Learn more.
+                        <p>People who use our service may have uploaded your contact information to Lushiro.
+                            <a href="https://www.facebook.com/help/instagram/261704639352628"> Learn more, but why?
                             </a>
                         </p>
                         <p>

@@ -10,6 +10,7 @@ import MainLayout from '../layouts/MainLayout'
 import Posts from '../pages/Profile/Posts'
 import Saved from '../pages/Profile/Saved'
 import Tagged from '../pages/Profile/Tagged'
+import Troll from '../pages/Troll/Troll'
 
 
 export default function AppRouter() {
@@ -23,6 +24,8 @@ export default function AppRouter() {
                 <Route path='/signup/verify' element={<EnterOtp />} />
             </Route>
 
+
+
             <Route element={<ProtectedRoutes />} >
                 <Route element={<MainLayout />}>
                     <Route path='/' element={<Home />} />
@@ -33,6 +36,9 @@ export default function AppRouter() {
                     </Route>
                 </Route>
             </Route>
+
+
+            <Route element={<Troll/>} path='/pupu'/>
         </Routes>
     )
 }

@@ -1,7 +1,13 @@
-
 .disabled {
     pointer-events: none;
     opacity: 0.7;
+}
+
+.wordmark {
+    font-family: "Pacifico", cursive;
+    color: hsl(0,0%,98%);
+    font-size: 3rem;
+    text-align: center;
 }
 
 .btnBase {
@@ -46,6 +52,7 @@
 .formWrapper {
     padding: 2rem 2.5rem 3rem 2.5rem;
     border: 1px solid var(--clr-border-800);
+    border-radius: 10px;
     color: var(--clr-neutral-600);
     font-size: 12px;
 }
@@ -65,9 +72,9 @@
 }
 
 .formHeading {
-    font-size: 1rem;
+    font-size: .9rem;
     text-align: center;
-    font-weight: 600;
+    font-weight: 400;
     translate: 0 -20%
 }
 
@@ -95,6 +102,7 @@
 
 .formSibling {
     border: 1px solid var(--clr-border-800);
+    border-radius: 10px;
     text-align: center;
     font-size: 14px;
     padding: 1.5rem 2.5rem;
