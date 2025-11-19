@@ -5,6 +5,7 @@ const tempTokenSchema = new mongoose.Schema({
     password: String,
     username: String,
     otp_uuid: String,
+    fullName: String,
     otp: Number,
     createdAt: {
         type: Date,

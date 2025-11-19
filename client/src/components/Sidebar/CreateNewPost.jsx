@@ -98,7 +98,7 @@ const CreateNewPost = ({ createNewPostRef, setMyPosts }) => {
                                     <ImagePlus size={64} />
                                     <p>Upload photos and videos here</p>
                                     <div className={styles.selectFile}>
-                                        <label htmlFor="fileUpload">Select from Computer</label>
+                                        <label htmlFor="fileUpload">Choose from device</label>
                                         <input onChange={handleFileSelect} id='fileUpload' type="file" accept='image/*, video/*' />
                                     </div>
                                 </section>

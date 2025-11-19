@@ -11,6 +11,7 @@ import Posts from '../pages/Profile/Posts'
 import Saved from '../pages/Profile/Saved'
 import Tagged from '../pages/Profile/Tagged'
 import Troll from '../pages/Troll/Troll'
+import NotFoundPage from '../pages/Extras/NotFoundPage'
 
 
 export default function AppRouter() {
@@ -38,7 +39,8 @@ export default function AppRouter() {
             </Route>
 
 
-            <Route element={<Troll/>} path='/pupu'/>
+            <Route element={<Troll />} path='/pupu' />
+            <Route element={<NotFoundPage />} path='*'  />
         </Routes>
     )
 }

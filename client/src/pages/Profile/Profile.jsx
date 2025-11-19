@@ -21,7 +21,7 @@ const Profile = () => {
 
     const [followersCount, setFollowersCount] = useState(500)
 
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
     const [isAdmin, setIsAdmin] = useState(false)
     const currentUser = useAuth().user
 
@@ -34,6 +34,7 @@ const Profile = () => {
             if (status != 200) return console.error("error")
 
             const { user } = data.data
+            // ###FIX DOUBT, redirection for unknown user not working
             setUser(user)
 
             //Sync initial followersCount value
@@ -70,7 +71,7 @@ const Profile = () => {
                                         <FollowBtn setFollowersCount={setFollowersCount} username={user.username} isFollowing={isFollowing} setIsFollowing={setIsFollowing} />
                                     }
                                     <button className={styles.darkBtnBase}>
-                                       Coming Soon!
+                                        Coming Soon!
                                     </button>
                                     <button className={styles.settings}>
                                         <Cog size={24} />

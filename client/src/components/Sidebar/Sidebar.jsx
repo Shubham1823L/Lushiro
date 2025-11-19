@@ -32,7 +32,7 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
 
                 <NavLink to={"/"} className={styles.logoWrapper}>
                     <p className={styles.wordmark}>Lushiro</p>
-                    <img src="cool.png" alt="lushiroLogo" className={styles.lushiroLogo} />
+                    <img src="/cool.png" alt="lushiroLogo" className={styles.lushiroLogo} />
                 </NavLink>
 
                 <ul className={styles.list}>
@@ -63,7 +63,7 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
                     </li>
 
                     <li className={styles.listItem}>
-                        <SidebarNavLink to={"/"}>
+                        <SidebarNavLink to={"/explore"}>
                             <div>
                                 <MdOutlineExplore size={28} />
                             </div>

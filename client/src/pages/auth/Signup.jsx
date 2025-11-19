@@ -73,13 +73,13 @@ const Signup = () => {
                             <UsernameField toggleValid={toggleValid} ref={refs.username} />
                         </div>
                         <p>People who use our service may have uploaded your contact information to Lushiro.
-                            <a href="https://www.facebook.com/help/instagram/261704639352628"> Learn more, but why?
-                            </a>
+                            <Link to={"/pupu"}> Learn more, but why?
+                            </Link>
                         </p>
                         <p>
                             By signing up, you agree to our
-                            <a href="https://help.instagram.com/581066165581870/?locale=en_GB"> Terms, Privacy Policy </a>
-                            and <a href="https://privacycenter.instagram.com/policies/cookies/">Cookies Policy</a>
+                            <Link to={"/pupu"}> Terms, Privacy Policy </Link>
+                            and <Link to={"/pupu"}>Cookies Policy</Link>
                         </p>
                         <button onClick={handleSubmit} type='submit' className={clsx(!clickable && styles.disabled, styles.btnBase)}>Sign Up</button>
                     </form>

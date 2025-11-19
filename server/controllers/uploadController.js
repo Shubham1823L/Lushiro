@@ -16,7 +16,7 @@ export const uploadFileToCloudinary = async (req, res) => {
     if (!file) return res.fail(400, "FILE_NOT_FOUND", "The file you sent was either empty or could not be found")
 
     const result = await cloudinary.uploader.upload(file.path, {
-        folder: "instaProject_uploads",
+        folder: "lushrioProject_uploads",
         use_filename: true,
         unique_filename: true,
         resource_type: "auto"
