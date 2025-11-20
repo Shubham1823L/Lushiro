@@ -17,7 +17,7 @@ services:
       - atlas=$$atlas
       - MODE="production"
     env_file:
-      - ./server/.env
+      - ./server/.env.production
     restart: unless-stopped
     networks:
       - app_net
