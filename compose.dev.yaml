@@ -26,7 +26,8 @@ services:
     environment:
       - PORT=1823
       - CLIENT_URL=http://localhost:5173
-      - atlas = $$atlas
+      - atlas=$$atlas
+      - MODE= "development"
     volumes:
       - ./server:/app:ro
       - /app/node_modules

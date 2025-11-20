@@ -21,10 +21,13 @@ const app = express()
 app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded())
-app.use(cors({
-    origin: env.CLIENT_URL,
-    credentials: true
-}))
+if (env.MODE === "development") {
+    app.use(cors({
+        origin: env.CLIENT_URL,
+        credentials: true
+    }))
+}
+
 
 app.use(responseHandler)
 
