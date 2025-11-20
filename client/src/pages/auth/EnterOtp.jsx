@@ -12,14 +12,19 @@ const EnterOtp = () => {
     const navigate = useNavigate()
     const { updateUser, updateToken } = useAuth()
     const [clickable, setClickable] = useState(false)
+    const [error, setError] = useState("")
     const ref = useRef()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const value = (ref.current.value).trim()
-        const response = await verifyOtp(value)
-        if (response.status >= 400) return console.error("ERROR")
-        const { user, accessToken } = response.data.data
+        const value = ref.current.value
+        const { status, data } = await verifyOtp(value)
+
+        if (status == 500) return setError("Internal Error")
+        if (status == 400) return setError("Incorrect OTP")
+        if (status == 410) return setError(data.message)
+
+        const { user, accessToken } = data.data
         updateToken(accessToken)
         updateUser(user)
         navigate(`/${user.username}`, { replace: true })
@@ -27,10 +32,16 @@ const EnterOtp = () => {
     }
 
 
-    const handleChange = () => {
-        const value = (ref.current.value).trim()
-        if (value.length === 6 && parseInt(value)) setClickable(true)
-        else setClickable(false)
+    const handleBlur = () => {
+        const value = ref.current.value
+        if (value.length === 6 && parseInt(value)) {
+            setClickable(true)
+            setError("")
+        }
+        else {
+            setClickable(false)
+            setError("Invalid format")
+        }
     }
 
 
@@ -44,7 +55,7 @@ const EnterOtp = () => {
 
 
                         <div className={clsx(styles.formFields, loginStyles.formFields)}>
-                            <TextField type={"text"} placeholder={"Enter your OTP"} ref={ref} handleChange={handleChange} />
+                            <TextField error={error} type={"text"} placeholder={"Enter your OTP"} ref={ref} handleBlur={handleBlur} />
                         </div>
 
                         <button onClick={handleSubmit} type='submit' className={clsx(!clickable && styles.disabled, styles.btnBase)}>Next</button>

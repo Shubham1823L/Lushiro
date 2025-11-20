@@ -26,13 +26,14 @@ export const verifyOtp = async (req, res) => {
 
 
     const otpData = await Temp_verification_token.findOne({ otp_uuid })
-    if (!otpData) return res.status(500)
+    if (!otpData) return res.sendStatus(500)
 
     // email and otp_uuid.email will always match, no need to check since both are sent in cookies
-    if ((req.body.otp).trim() != otpData.otp) return res.fail(400, "OTP_INVALID", "Your otp is invalid")
-
+    if (req.body.otp != otpData.otp) return res.fail(400, "OTP_INCORRECT", "Your otp is incorrect")
     const expiresAt = otpData.createdAt + 5 * 60 * 1000
-    if (Date.now() > expiresAt) return res.fail(410, "OTP_EXPIRED", "Your otp has expired, please request a new one")
+    // ###DOUBT Date.now().toString() better way?? it shld have worked directly
+
+    if (Date.now().toString() > expiresAt) return res.fail(410, "OTP_EXPIRED", "OTP expired")
     // Otp is correct and not expired 
     // Creating New User in db and cleaning up
 
