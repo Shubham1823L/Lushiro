@@ -1,48 +1,31 @@
 services:
+  #client is the service name and lushiro_client is the container name and we can acces the frontend using it domain name inside the compose project that is throught the internally established DNS system of that docker compose project. BUT THE THINGIES ACTUALLY RUN ON BROWSER AND CORS ALSO IS A BROWSER ONLY THING , so we use localhost instead of service names, service names won't work because we are not inside the container, and when frontend sends request to backend ,it is on the browser , not inside the container , the container is just a place to serve the files, not to host them.
 
-   #client is the service name and lushiro_client is the container name and we can acces the frontend using it domain name inside the compose project that is throught the internally established DNS system of that docker compose project. BUT THE THINGIES ACTUALLY RUN ON BROWSER AND CORS ALSO IS A BROWSER ONLY THING , so we use localhost instead of service names, service names won't work because we are not inside the container, and when frontend sends request to backend ,it is on the browser , not inside the container , the container is just a place to serve the files, not to host them. 
-  
+
+
+
   server:
-    build:
-      context: ./server
-      dockerfile: Dockerfile.prod
-    image: lushiro_server:prod
+    image: ghcr.io/Shubham1823L/Lushiro-server:latest
     container_name: lushiro_prod_server
-    # ports:
-    #   - "8080:8080"
     expose:
-      - 8080
-    environment:
-      - PORT=8080
-      - atlas=$$atlas
-      - MODE="production"
+      - "8080"
     env_file:
       - ./server/.env.production
     restart: unless-stopped
     networks:
       - app_net
 
-
-
-  client: 
-    build:
-      context: ./client
-      dockerfile: Dockerfile.prod
-    image: lushiro_client:prod
+  client:
+    image: ghcr.io/Shubham1823L/Lushiro-client:latest
     container_name: lushiro_prod_client
-    volumes:
-      - frontend_dist:/mnt/frontend_dist
-    command: ["sh", "-c","cp -r /app/dist/* /mnt/frontend_dist"]
-    # ports:
-    #   - "3000:3000"
+    expose:
+      - "80"
     depends_on:
       - server
+    restart: unless-stopped
     networks:
       - app_net
-    restart: no
 
-
- 
   nginx:
     image: nginx:1.29.3
     container_name: lushiro_prod_nginx
@@ -51,7 +34,6 @@ services:
       - "443:443"
     volumes:
       - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      - frontend_dist:/usr/share/nginx/html:ro
       - certbot_data:/etc/letsencrypt
     networks:
       - app_net
@@ -60,22 +42,8 @@ services:
     restart: unless-stopped
 
 
-
-  certbot:
-    image: certbot/certbot
-    volumes:
-      - certbot_data:/etc/letsencrypt
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-    entrypoint: /bin/sh
-    tty: true
-
-
-
 networks:
   app_net:
 
-
 volumes:
-  frontend_dist:
   certbot_data:
-    
