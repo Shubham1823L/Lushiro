@@ -5,7 +5,7 @@ services:
 
 
   server:
-    image: ghcr.io/Shubham1823L/lushiro-server:latest
+    image: ghcr.io/shubham1823l/lushiro-server:latest
     container_name: lushiro_prod_server
     expose:
       - "8080"
@@ -16,7 +16,7 @@ services:
       - app_net
 
   client:
-    image: ghcr.io/Shubham1823L/lushiro-client:latest
+    image: ghcr.io/shubham1823l/lushiro-client:latest
     container_name: lushiro_prod_client
     expose:
       - "80"
