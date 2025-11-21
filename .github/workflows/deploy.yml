@@ -53,10 +53,7 @@ jobs:
         host: ${{ secrets.EC2_HOST }}
         username: ubuntu
         key: ${{ secrets.EC2_SSH_KEY }}
-        source: |
-          compose.prod.yaml
-          nginx
-          deploy.sh
+        source: "compose.prod.yaml,deploy.sh,nginx"
         target: /opt/myapp
 
     #8. Run deploy.sh on EC2
