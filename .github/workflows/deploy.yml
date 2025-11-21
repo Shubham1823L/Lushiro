@@ -55,6 +55,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         source: "compose.prod.yaml,deploy.sh,nginx"
         target: /opt/myapp
+    # Changed user permissions on server
 
     #8. Run deploy.sh on EC2
     - name: Run deploy.sh on EC2
