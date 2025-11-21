@@ -6,7 +6,7 @@ const LoadingPage = () => {
         <>
             <div className={styles.loadingPageWrapper}>
                 <main className={styles.main}>
-                    <img src="/cool.png" alt="lushrioLogo" className={styles.lushiroLogo} />
+                    <img src="/eat.png" alt="lushrioLogo" className={styles.lushiroLogo} />
                 </main>
                 <footer className={styles.footer}>
                     <p>by</p>

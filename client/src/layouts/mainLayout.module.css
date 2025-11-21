@@ -23,6 +23,21 @@
 
 @media(width>1920px) {
     .main {
-        width: calc(100% - 314px - 1.6rem);
+        width: calc(100% - 314px);
+    }
+}
+
+@media (width<1290px) {
+    .main {
+        width: calc(100% - 80px);
+        >*{
+            max-width: 700px;
+        }
+    }
+}
+
+@media (width<640px) {
+    .main{
+        width: 100%;
     }
 }

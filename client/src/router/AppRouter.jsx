@@ -30,6 +30,7 @@ export default function AppRouter() {
             <Route element={<ProtectedRoutes />} >
                 <Route element={<MainLayout />}>
                     <Route path='/' element={<Home />} />
+                    <Route path='/explore' element={<Troll />} />
                     <Route path='/:username' element={<Profile />} >
                         <Route index element={<Posts />} />
                         <Route path='saved' element={<Saved />} />
@@ -40,7 +41,7 @@ export default function AppRouter() {
 
 
             <Route element={<Troll />} path='/pupu' />
-            <Route element={<NotFoundPage />} path='*'  />
+            <Route element={<NotFoundPage />} path='*' />
         </Routes>
     )
 }

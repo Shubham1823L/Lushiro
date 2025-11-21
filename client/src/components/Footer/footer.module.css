@@ -30,6 +30,7 @@
 .langSelect {
     background-color: black;
     color: var(--clr-neutral-600);
+    width:fit-content;
     font: inherit;
     border: none;
     cursor: pointer;

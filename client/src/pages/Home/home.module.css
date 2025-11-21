@@ -41,12 +41,13 @@
 }
 
 .story {
+    --dim: 85px;
     display: flex;
     justify-content: center;
     align-items: center;
 
-    width: 85px;
-    height: 85px;
+    width: var(--dim);
+    height: var(--dim);
     border-radius: 50%;
     padding: .22rem;
     background: #FEDA75;
@@ -85,9 +86,8 @@
 
 .post {
     /* ###REMOVE later */
-    min-height: 700px;
-
-    width: min(470px, 100%);
+    
+    width: min(470px, 80%);
     font-size: 14px;
     font-weight: 600;
     display: flex;
@@ -145,7 +145,9 @@
 
 .postContent {
     height: 585px;
+    width: 100%;
     object-fit: cover;
+    object-position: center center;
 }
 
 .postBottom {
@@ -217,10 +219,7 @@
 
 .commentInputWrapper {
     display: flex;
-
     padding-block: .3em;
-
-
 
 }
 
@@ -254,4 +253,29 @@
 .sidebar {
     width: 300px;
     flex-shrink: 0;
+}
+
+
+@media (width<1290px) {
+
+    /* ###FIX CHANGE LATER */
+    .sidebar {
+        display: none;
+    }
+}
+
+@media (width<640px) {
+    .postContent {
+        height: auto !important;
+    }
+
+    .story {
+        padding: .15rem;
+    }
+}
+@media (width<480px) {
+    .post{
+        width: 100%;
+
+    }
 }

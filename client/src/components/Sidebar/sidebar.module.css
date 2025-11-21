@@ -622,6 +622,34 @@
 
 @media (width>1920px) {
     .sidebar {
-        width: 314px;
+        width: calc(314px - 1.6rem);
+    }
+}
+
+
+@media(width<1290px) {
+    .sidebarWrapper {
+        border: none;
+
+        .sidebar {
+            width: calc(80px - 1.6rem);
+        }
+
+        .listItemText,
+        .wordmark {
+            display: none;
+        }
+
+        .lushiroLogo {
+            width: 32px;
+            display: block;
+        }
+    }
+}
+
+
+@media (width<640px) {
+    .sidebarWrapper{
+        display: none;
     }
 }
