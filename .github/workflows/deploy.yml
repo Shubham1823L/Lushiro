@@ -45,12 +45,6 @@ jobs:
       run: |
         sed -i "s|latest|${{ github.sha }}|g" compose.prod.yaml
 
-    - name: GOGA
-      run: |
-        echo "=== ROOT DIR ==="
-         ls -R .
-         echo "=== GITHUB WORKSPACE ==="
-         ls -R $GITHUB_WORKSPACE
 
     #7. Copy files to EC2
     - name: Copy files to EC2
@@ -61,7 +55,7 @@ jobs:
         key: ${{ secrets.EC2_SSH_KEY }}
         source: |
           compose.prod.yaml
-          nginx/default.conf
+          nginx
           deploy.sh
         target: /opt/myapp
 
