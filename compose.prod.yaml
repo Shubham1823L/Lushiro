@@ -18,6 +18,8 @@ services:
   client:
     image: ghcr.io/shubham1823l/lushiro-client:latest
     container_name: lushiro_prod_client
+    volumes:
+      - ./nginx/client.conf:/etc/nginx/conf.d/client.conf:ro
     expose:
       - "80"
     depends_on:

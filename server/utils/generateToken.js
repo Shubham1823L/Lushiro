@@ -3,7 +3,7 @@ import env from '../config/env.js'
 
 export const generateAccessToken = (payload) => {
     try {
-        return jwt.sign({ email: payload }, env.ACCESS_TOKEN_SECRET, { expiresIn: "2h" })
+        return jwt.sign({ email: payload }, env.ACCESS_TOKEN_SECRET, { expiresIn: "1h" })
     } catch (error) {
         throw error
     }
