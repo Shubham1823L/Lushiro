@@ -22,13 +22,13 @@ jobs:
     #3. Build Server image
     - name: Build Server image
       run: |
-        docker build -t ghcr.io/${{ github.actor | lower}}/lushiro-server:${{ github.sha }} \
+        docker build -t ghcr.io/${{ github.actor | lower }}/lushiro-server:${{ github.sha }} \
         -f server/Dockerfile.prod server
 
     #4. Build Client image, | means continue this command in the next line is the same command 
     - name: Build Client image
       run: |
-        docker build -t ghcr.io/${{ github.actor | lower}}/lushiro-client:${{ github.sha }} \
+        docker build -t ghcr.io/${{ github.actor | lower }}/lushiro-client:${{ github.sha }} \
         -f client/Dockerfile.prod client
 
     #5. Push client and server images to ghcr, the uri itself has everything that is needed to convey where and what to push
@@ -38,7 +38,7 @@ jobs:
 
     - name: Push client image to ghcr.io
       run: |
-        docker push ghcr.io/${{ github.actor | lower}}/lushiro-client:${{ github.sha }}
+        docker push ghcr.io/${{ github.actor | lower }}/lushiro-client:${{ github.sha }}
 
     #6. Update compose.prod.yaml. before copying to ec2 , sed is streamline editor, -i means, s means substitute, | is a delimeter(seperator), we don't use / as names may also have / in them, g means replace all occurrences
     - name: Update compose.prod.yaml with commit SHA
