@@ -11,7 +11,7 @@ import { fetchUserfromAPI } from '../../api/userQuery';
 import { useAuth } from '../../hooks/useAuth';
 import LoadingPage from '../Extras/LoadingPage';
 import FollowBtn from './FollowBtn';
-import {Cog} from 'lucide-react'
+import { Cog } from 'lucide-react'
 
 const Profile = () => {
     const params = useParams()
@@ -100,12 +100,26 @@ const Profile = () => {
                     </div>
                     <div className={styles.heroBottom}>
                         <div>
-                            <div className={styles.createNewPostWrapper}>
-                                <button className={styles.createNewPost}>
+                            <div className={styles.createNewStoryWrapper}>
+                                <button className={styles.createNewStory}>
                                     <FiPlus size={56} strokeWidth={1.5} color='grey' />
                                 </button>
                             </div>
                             New
+                        </div>
+                        <div className={styles.metricsCountMobile}>
+                            <span>
+                                <span>{user.posts.length}</span>
+                                <span>{user.posts.length > 1 ? "posts" : "post"}</span>
+                            </span>
+                            <span>
+                                <span>{followersCount}</span>
+                                <span>{followersCount > 1 ? "followers" : "follower"}</span>
+                            </span>
+                            <span>
+                                <span>{user.followingCount}</span>
+                                <span>following</span>
+                            </span>
                         </div>
 
                     </div>

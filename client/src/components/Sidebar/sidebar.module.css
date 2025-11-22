@@ -629,8 +629,7 @@
 
 @media(width<1290px) {
     .sidebarWrapper {
-        border: none;
-
+        
         .sidebar {
             width: calc(80px - 1.6rem);
         }
@@ -648,7 +647,7 @@
 }
 
 
-@media (width<640px) {
+@media (width<=768px) {
     .sidebarWrapper{
         display: none;
     }

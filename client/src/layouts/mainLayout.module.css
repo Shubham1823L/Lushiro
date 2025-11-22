@@ -36,7 +36,8 @@
     }
 }
 
-@media (width<640px) {
+
+@media (width<=768px) {
     .main{
         width: 100%;
     }

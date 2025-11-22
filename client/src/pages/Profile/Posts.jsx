@@ -29,7 +29,9 @@ const Posts = () => {
 
     return (
         <>
-            {loading || allPosts.length == 0 ? <div className={styles.emptyPostsPlaceholder}>
+        {/* ###FIX loading also shows emptyPostsPlaceholder which causes flicker type bug */}
+            {loading || allPosts.length == 0 ? 
+            <div className={styles.emptyPostsPlaceholder}>
                 <div className={styles.camIconContainer}>
                     <FiCamera size={36} strokeWidth={.8} />
                 </div>

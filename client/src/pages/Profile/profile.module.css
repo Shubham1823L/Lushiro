@@ -1,8 +1,7 @@
 .hero {
-    height: 400px;
     display: flex;
     flex-direction: column;
-
+    gap: 2rem;
 }
 
 .profile {
@@ -20,8 +19,9 @@
 }
 
 .avatarWrapper {
-    width: 150px;
-    height: 150px;
+    --dim: 150px;
+    width: var(--dim);
+    height: var(--dim);
     border-radius: 50%;
     overflow: hidden;
     display: flex;
@@ -100,7 +100,8 @@
 }
 
 
-.metricsCount {
+.metricsCount,
+.metricsCountMobile {
     display: flex;
     gap: 2.3rem;
 
@@ -119,28 +120,44 @@
 
 }
 
+
+
 .fullName {
     font-weight: 600;
-    font-size: 14px;
-    padding-block: .5rem;
+    font-size: .875rem;
+    padding-block: .5em;
 }
 
 .heroBottom {
     flex: 1;
     display: flex;
     align-items: center;
-    padding-left: 2.5rem;
 
-    >div {
+    >div:first-child {
         display: grid;
         gap: .5rem;
+        margin-left: 2.5rem;
         place-items: center;
         font-size: 12px;
         font-weight: 600;
     }
 }
 
-.createNewPostWrapper {
+.metricsCountMobile {
+    display: none;
+    border-top: .5px solid var(--clr-border-800);
+    padding: 1rem 0rem;
+    flex-grow: 1;
+    justify-content: space-around;
+
+    >span {
+        flex-direction: column;
+        align-items: center;
+        flex: 1;
+    }
+}
+
+.createNewStoryWrapper {
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -149,7 +166,7 @@
     cursor: pointer;
 }
 
-.createNewPost {
+.createNewStory {
     border-radius: 50%;
     margin: auto;
     width: 100%;
@@ -163,6 +180,22 @@
 
 
 /* Below Hero */
+.wrapper {
+    height: 100dvh;
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.mainContentWrapper {
+    display: grid;
+    grid-template-rows: auto 1fr;
+}
+
+.mainContent {
+    padding-top: .5rem;
+    display: grid;
+    grid-template-rows: 1fr;
+}
 
 .mainContentNav {
     border-bottom: .1px solid var(--clr-border-900);
@@ -193,18 +226,16 @@
     color: white;
 }
 
-.mainContent {
-    padding-top: .5rem;
-}
+
 
 
 /* Posts */
 .emptyPostsPlaceholder {
+    align-self: center;
     display: grid;
     place-content: center;
     place-items: center;
     gap: 1rem;
-    height: 320px;
 
     .camIconContainer {
         padding: .2rem;
@@ -240,6 +271,7 @@
 }
 
 .posts {
+    align-self: flex-start;
     display: grid;
     place-content: center;
     grid-template-columns: repeat(3, 1fr);
@@ -254,7 +286,9 @@
     cursor: pointer;
 
     img {
+        object-position: center center;
         object-fit: cover;
+        width: 100%;
         height: 100%;
     }
 }
@@ -288,5 +322,81 @@
 
     &:hover {
         background-color: var(--clr-button-900-focused);
+    }
+}
+
+@media (width<1060px) {
+    .post {
+        height: auto;
+        aspect-ratio: 3/4;
+    }
+
+
+}
+
+
+
+@media (max-width:960px) {
+    .avatarArea {
+        padding-inline: 2rem;
+    }
+}
+
+@media (max-width:768px) {
+    .profileData {
+        gap: .8rem;
+    }
+
+    .profileDataHeader {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .avatarWrapper {
+        --dim: 100px;
+    }
+
+    .metricsCount {
+        display: none;
+    }
+
+    .settings {
+        display: none;
+    }
+
+    .heroBottom {
+        >div:first-child {
+            display: none;
+        }
+    }
+
+    .metricsCountMobile {
+        display: flex;
+    }
+
+    .mainContentNav {
+        border-bottom: 1px solid var(--clr-border-900);
+
+        >div:first-child {
+            max-width: 60%;
+        }
+    }
+
+
+}
+
+
+@media (max-width:480px) {
+    .mainContentNav>div:first-child {
+        max-width: 80%;
+    }
+
+    .avatarArea {
+        padding-inline: 1rem;
+    }
+
+    .avatarWrapper {
+        --dim: 80px;
     }
 }
