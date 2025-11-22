@@ -5,6 +5,8 @@ import { Outlet, useParams } from 'react-router-dom'
 import Footer from "../components/Footer/Footer"
 import clsx from 'clsx'
 import { Toaster } from 'react-hot-toast'
+import BottomNavbar from '../components/BottomNavbar/BottomNavbar'
+import TopNavbar from '../components/TopNavbar/TopNavbar'
 
 const MainLayout = () => {
     const params = useParams()
@@ -14,21 +16,23 @@ const MainLayout = () => {
     const showCreateNewPostDialog = () => {
         createNewPostRef.current.style.display = "flex"
     }
-    
+
 
 
 
     return (
 
         <>
+            <TopNavbar />
             <div className={styles.mainLayoutWrapper}>
                 <Sidebar setMyPosts={setMyPosts} createNewPostRef={createNewPostRef} showCreateNewPostDialog={showCreateNewPostDialog} />
-                <main className={clsx(styles.main,params.username && styles.smallChildrenWidth)}>
+                <main className={clsx(styles.main, params.username && styles.smallChildrenWidth)}>
                     <Outlet context={{ myPosts, showCreateNewPostDialog }} />
                     <Footer />
                 </main>
             </div>
-            <Toaster position='top-right'/>
+            <BottomNavbar />
+            <Toaster position='top-right' />
         </>
     )
 }

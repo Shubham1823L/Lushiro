@@ -1,0 +1,32 @@
+.nav {
+    height: 46.8px;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    padding: .5rem 1rem;
+    background-color: black;
+
+
+
+}
+
+
+.wordmark {
+    margin-right: auto;
+    font-family: "Pacifico", cursive;
+    color: hsl(0, 0%, 98%);
+    font-size: 2rem;
+    font-weight: 400;
+    text-align: center;
+}
+
+
+@media (width>768px) {
+    .nav {
+        display: none;
+    }
+}

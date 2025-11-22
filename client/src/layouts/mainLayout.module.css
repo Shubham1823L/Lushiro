@@ -30,7 +30,8 @@
 @media (width<1290px) {
     .main {
         width: calc(100% - 80px);
-        >*{
+
+        >* {
             max-width: 700px;
         }
     }
@@ -38,7 +39,11 @@
 
 
 @media (width<=768px) {
-    .main{
+    .main {
         width: 100%;
+    }
+
+    .mainLayoutWrapper {
+       padding: 2.5rem .5rem 2.5rem .5rem;
     }
 }
