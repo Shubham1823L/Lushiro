@@ -84,7 +84,7 @@
 .darkBtnBase {
     background-color: var(--clr-neutral-700);
     border-radius: 10px;
-    font-size: 14.5px;
+    font-size: .875rem;
     font-weight: 600;
     padding: .5em 1em;
     transition: all .15s linear;
@@ -146,7 +146,8 @@
 .metricsCountMobile {
     display: none;
     border-top: .5px solid var(--clr-border-800);
-    padding: 1rem 0rem;
+    padding: 1rem;
+    align-items: center;
     flex-grow: 1;
     justify-content: space-around;
 
@@ -180,21 +181,9 @@
 
 
 /* Below Hero */
-.wrapper {
-    height: 100dvh;
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
-
-.mainContentWrapper {
-    display: grid;
-    grid-template-rows: auto 1fr;
-}
-
 .mainContent {
-    padding-top: .5rem;
-    display: grid;
-    grid-template-rows: 1fr;
+    padding-top: 1rem;
+
 }
 
 .mainContentNav {
@@ -236,6 +225,7 @@
     place-content: center;
     place-items: center;
     gap: 1rem;
+    height: 420px;
 
     .camIconContainer {
         padding: .2rem;
@@ -271,12 +261,13 @@
 }
 
 .posts {
-    align-self: flex-start;
+    /* align-self: flex-start; */
     display: grid;
     place-content: center;
     grid-template-columns: repeat(3, 1fr);
     gap: .1rem;
     row-gap: 1rem;
+
 }
 
 .post {
@@ -383,6 +374,12 @@
         }
     }
 
+    /* ###DOUBT FIX padding and spacing and all like border also are weird in x direcion on mobile devices , also padding and all are very diff when opened in chrome as compared to google on phone */
+    .posts {
+        padding-inline: .8rem;
+
+    }
+
 
 }
 
@@ -399,4 +396,5 @@
     .avatarWrapper {
         --dim: 80px;
     }
+
 }

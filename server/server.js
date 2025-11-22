@@ -43,4 +43,4 @@ app.use('/api/users', userRoutes)
 app.use(errorHandler)
 
 connectDB()
-app.listen(env.PORT || 3000)
+app.listen(env.PORT || 3000, "0.0.0.0")
