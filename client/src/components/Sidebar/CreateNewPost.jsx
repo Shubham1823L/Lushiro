@@ -42,8 +42,8 @@ const CreateNewPost = ({ createNewPostRef, setMyPosts }) => {
             createNewPostRef.current.style.display = "none"
             setUploading(false)
         }
-        if (status == 400) return toast.error("File was empty/invalid, Bad request")
-        if (status == 500) return toast.error("Something went wrong on our end")
+        if (status == 400) return console.error("File was empty/invalid, Bad request")
+        if (status == 500) return console.error("Something went wrong on our end")
         if (status == 200) {
             const response = await publishNewPost(data)
             if (response.status >= 300) {

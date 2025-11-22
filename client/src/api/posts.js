@@ -9,7 +9,7 @@ export const uploadFile = async (file) => {
         const response = await api.post('/upload/newPost', formData)
         return response
     } catch (error) {
-        console.error("An error occured while uploading the file")
+        console.error("An error occured while uploading the file",error)
         return error.response
     }
 
@@ -17,6 +17,7 @@ export const uploadFile = async (file) => {
 
 export const publishNewPost = async (data) => {
     try {
+        console.log()
         const response = await api.post('/posts', data)
         return response
     } catch (error) {
