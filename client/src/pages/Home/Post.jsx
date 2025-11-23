@@ -4,6 +4,12 @@ import { MessageCircle, Send, Bookmark, Ellipsis } from 'lucide-react'
 import LikeButton from '../../components/Buttons/LikeButton';
 import { useAuth } from '../../hooks/useAuth';
 import CommentSection from './CommentSection';
+import { format, quality } from '@cloudinary/url-gen/actions/delivery'
+import { auto as fAuto } from '@cloudinary/url-gen/qualifiers/format'
+import { auto as qAuto } from '@cloudinary/url-gen/qualifiers/quality'
+import cld from '../../libs/cloudinary';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { AdvancedImage } from '@cloudinary/react'
 
 
 const Post = ({ post }) => {
@@ -18,18 +24,25 @@ const Post = ({ post }) => {
         else return change / 365 + " y"
     }, [])
 
+
+    const myImage = cld.image(post.content.publicId).resize(fill().width(1600)).delivery(format(fAuto())).delivery(quality(qAuto()))
+    const myAvatar = cld.image(post.author.avatar.publicId).resize(fill().width(200)).delivery(format(fAuto())).delivery(quality(qAuto()))
+
     return (
         <article className={styles.post}>
 
             <div className={styles.postHeader}>
-                <img src={post.author?.avatar?.secureUrl || "defaultAvatar.jpeg"} alt="avatar" />
+                <AdvancedImage cldImg={myAvatar} alt="avatar" />
                 <h2>{post.author?.username}</h2>
                 <span>{postAge}</span>
                 <button className={styles.moreOptions}><Ellipsis size={20} /></button>
             </div>
 
             <div className={styles.postContentWrapper}>
-                <img className={styles.postContent} src={post.content?.secureUrl || "defaultPost.jpg"} alt="postContent" />
+                <picture>
+                    <AdvancedImage className={styles.postContent} cldImg={myImage} alt="postContent" />
+                </picture>
+
             </div>
 
             <div className={styles.postBottom}>

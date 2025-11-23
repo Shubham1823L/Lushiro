@@ -9,5 +9,6 @@ RUN npm install
 COPY . .
 
 ENV VITE_API_BASE_URL=http://localhost:1823/api
+ENV VITE_CLOUDINARY_CLOUD_NAME=dvln1dlk4
 
 CMD [ "npm","run","dev" ]

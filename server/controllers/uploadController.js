@@ -26,6 +26,7 @@ export const uploadFileToCloudinary = async (req, res) => {
     })
 
     const { secure_url, public_id } = result
+    
 
     //If the upload is for avatar update
     file.fieldname == "avatar" && await User.updateOne({ _id: req.user._id }, { $set: { avatar: { secureUrl: secure_url, publicId: public_id } } })

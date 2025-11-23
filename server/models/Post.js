@@ -9,7 +9,7 @@ const postSchema = new mongoose.Schema({
     content: {
         type: {
             secureUrl: { type: String, required: true },
-            publicId: { type: String, required: true }
+            publicId: { type: String, required: true },
         },
         required: true
     },
