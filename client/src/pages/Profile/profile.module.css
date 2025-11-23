@@ -367,7 +367,7 @@
     }
 
     .mainContentNav {
-        border-bottom: 1px solid var(--clr-border-900);
+        border-bottom: .5px solid var(--clr-border-800);
 
         >div:first-child {
             max-width: 60%;
@@ -375,10 +375,9 @@
     }
 
     /* ###DOUBT FIX padding and spacing and all like border also are weird in x direcion on mobile devices , also padding and all are very diff when opened in chrome as compared to google on phone */
-    .posts {
+    /* .posts {
         padding-inline: .8rem;
-
-    }
+    } */
 
 
 }

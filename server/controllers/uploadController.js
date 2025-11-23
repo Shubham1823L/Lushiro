@@ -16,10 +16,10 @@ export const uploadFileToCloudinary = async (req, res) => {
     if (!file) return res.fail(400, "FILE_NOT_FOUND", "The file you sent was either empty or could not be found")
 
     const result = await cloudinary.uploader.upload(file.path, {
-        folder: "lushrioProject_uploads",
+        folder: "lushiroProject_uploads",
         use_filename: true,
         unique_filename: true,
-        resource_type: "auto"
+        resource_type: "auto",
     })
     fs.unlink(file.path, (err) => {
         if (err) console.warn("File wasn't unlinked")
