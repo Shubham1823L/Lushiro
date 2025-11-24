@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { EyeOff, EyeClosed } from 'lucide-react'
 
 
-const TextField = ({ type, placeholder, handleBlur, ref, error }) => {
+const TextField = ({ type, placeholder, handleBlur, ref, error,autoCorrect }) => {
 
     const [currentType, setCurrentType] = useState(type)
     const toggleVisibility = (e) => {
@@ -19,7 +19,7 @@ const TextField = ({ type, placeholder, handleBlur, ref, error }) => {
         <>
             <div className={styles.inputWrapper}>
                 <div className={clsx(styles.textFieldWrapper, error && styles.errorBorder)}>
-                    <input onBlur={handleBlur} ref={ref} placeholder={placeholder} type={currentType} className={styles.textField} />
+                    <input spellCheck="false" autoComplete={autoCorrect} onBlur={handleBlur} ref={ref} placeholder={placeholder} type={currentType} className={styles.textField} />
                     <label className={styles.placeholder}>{placeholder}</label>
 
 

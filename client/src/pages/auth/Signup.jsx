@@ -28,7 +28,7 @@ const Signup = () => {
         e.preventDefault()
         const values = { email: refs.email.current.value, password: refs.password.current.value, username: refs.username.current.value, fullName: refs.fullName.current.value }
 
-        
+
         const response = await signup(values)
         const { status, data } = response
 
@@ -67,10 +67,10 @@ const Signup = () => {
                             <div ></div>
                         </div>
                         <div className={styles.formFields}>
-                            <EmailField toggleValid={toggleValid} ref={refs.email} />
-                            <PasswordField toggleValid={toggleValid} ref={refs.password} />
-                            <FullNameField toggleValid={toggleValid} ref={refs.fullName} />
-                            <UsernameField toggleValid={toggleValid} ref={refs.username} />
+                            <EmailField toggleValid={toggleValid} ref={refs.email} autoCorrect={"email"} />
+                            <PasswordField toggleValid={toggleValid} ref={refs.password} autoCorrect={"new-password"} />
+                            <FullNameField toggleValid={toggleValid} ref={refs.fullName} autoCorrect={"name"} />
+                            <UsernameField toggleValid={toggleValid} ref={refs.username} autoCorrect={"username"} />
                         </div>
                         <p>People who use our service may have uploaded your contact information to Lushiro.
                             <Link to={"/pupu"}> Learn more, but why?
