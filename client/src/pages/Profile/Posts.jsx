@@ -64,7 +64,6 @@ const Posts = () => {
                                     <MessageCircle />
                                     {post.commentsCount}
                                 </div>
-                                {console.log(post.content.publicId)}
                                 <picture>
                                     <source media="(max-width:480px)" srcSet={mobileUrl} />
                                     <source media="(max-width:768px)" srcSet={tabletUrl} />
