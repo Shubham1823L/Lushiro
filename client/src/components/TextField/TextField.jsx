@@ -5,7 +5,7 @@ import clsx from 'clsx';
 import { EyeOff, EyeClosed } from 'lucide-react'
 
 
-const TextField = ({ type, placeholder, handleBlur, ref, error,autoCorrect }) => {
+const TextField = ({ type, placeholder, handleBlur, ref, error, autoCorrect }) => {
 
     const [currentType, setCurrentType] = useState(type)
     const toggleVisibility = (e) => {
