@@ -70,8 +70,8 @@ const Login = () => {
 
 
                         <div className={clsx(styles.formFields, loginStyles.formFields)}>
-                            <TextField error={emailError} type="email" placeholder={"Email address"} ref={emailRef} handleBlur={handleEmailBlur} />
-                            <TextField error={passwordError} type={"password"} placeholder={"Password"} ref={passwordRef} handleBlur={handlePasswordBlur} />
+                            <TextField error={emailError} type="email" placeholder={"Email address"} ref={emailRef} handleBlur={handleEmailBlur} autoCorrect={"email"} />
+                            <TextField error={passwordError} type={"password"} placeholder={"Password"} ref={passwordRef} handleBlur={handlePasswordBlur} autoCorrect={"current-password"} />
                         </div>
 
                         <button onClick={handleSubmit} type='submit' className={clsx(!clickable && styles.disabled, styles.btnBase)}>Log in</button>

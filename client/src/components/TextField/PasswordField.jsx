@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import TextField from './TextField'
 
-const PasswordField = ({ toggleValid,ref }) => {
+const PasswordField = ({ toggleValid, ref, autoCorrect }) => {
 
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/
     const [error, setError] = useState("")
@@ -9,7 +9,7 @@ const PasswordField = ({ toggleValid,ref }) => {
     useEffect(() => {
         if (error) toggleValid(e => ({ ...e, password: false }))
         else toggleValid(e => ({ ...e, password: true }))
-    }, [error,toggleValid])
+    }, [error, toggleValid])
 
     const handleBlur = async () => {
         const value = ref.current.value
@@ -19,7 +19,7 @@ const PasswordField = ({ toggleValid,ref }) => {
     }
 
     return (
-        <TextField type={"password"} placeholder={"Password"} ref={ref} error={error} handleBlur={handleBlur} />
+        <TextField type={"password"} placeholder={"Password"} ref={ref} error={error} handleBlur={handleBlur} autoCorrect={autoCorrect} />
     )
 }
 
