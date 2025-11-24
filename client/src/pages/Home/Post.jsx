@@ -25,31 +25,22 @@ const Post = ({ post }) => {
     }, [])
 
 
-    const myImage = cld.image(post.content.publicId).resize(fill().width(1600)).delivery(format(fAuto())).delivery(quality(qAuto()))
-    const myAvatar = cld.image(post.author.avatar.publicId).resize(fill().width(200)).delivery(format(fAuto())).delivery(quality(qAuto()))
+    const myImage = useMemo(() => cld.image(post.content.publicId).resize(fill().width(1600)).delivery(format(fAuto())).delivery(quality(qAuto())).toURL(), [])
+    const myAvatar = useMemo(() => cld.image(post.author.avatar?.publicId).resize(fill().width(200)).delivery(format(fAuto())).delivery(quality(qAuto())).toURL(), [])
+
 
     return (
         <article className={styles.post}>
 
             <div className={styles.postHeader}>
-                <AdvancedImage cldImg={myAvatar} alt="avatar" plugins={[
-                    // Show low res blurred img till it loads
-                    placeholder({ mode: 'blur' }),
-                ]} />
+               <img src={myAvatar || "defaultAvatar.jpeg"} alt="avatar" />
                 <h2>{post.author?.username}</h2>
                 <span>{postAge}</span>
                 <button className={styles.moreOptions}><Ellipsis size={20} /></button>
             </div>
 
             <div className={styles.postContentWrapper}>
-                <picture>
-                    <AdvancedImage className={styles.postContent} cldImg={myImage} alt="postContent"
-                        plugins={[
-                            // Show low res blurred img till it loads
-                            placeholder({ mode: 'blur' }),
-                        ]}
-                    />
-                </picture>
+                <img className={styles.postContent} src={myImage} alt="postContent" />
 
             </div>
 

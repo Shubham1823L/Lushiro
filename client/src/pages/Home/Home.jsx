@@ -10,6 +10,7 @@ const Home = () => {
   //fetchUserFeed
   useEffect(() => {
     (async () => {
+      console.log("hi")
       const { status, data: { data } } = await apiFetchFeed(1, 5)
       if (status == 500) return console.error("Server side error, please be patient")
       if (status == 401) return console.error("Unauthorized")
