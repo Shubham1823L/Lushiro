@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 import styles from './home.module.css'
 import { MessageCircle, Send, Bookmark, Ellipsis } from 'lucide-react'
 import LikeButton from '../../components/Buttons/LikeButton';
@@ -9,7 +9,6 @@ import { auto as fAuto } from '@cloudinary/url-gen/qualifiers/format'
 import { auto as qAuto } from '@cloudinary/url-gen/qualifiers/quality'
 import cld from '../../libs/cloudinary';
 import { fill } from '@cloudinary/url-gen/actions/resize';
-import { AdvancedImage, lazyload, placeholder } from '@cloudinary/react'
 
 
 const Post = ({ post }) => {
@@ -22,10 +21,13 @@ const Post = ({ post }) => {
         if (change <= 30) return change + " d"
         if (change / 30 <= 12) return change / 30 + " w"
         else return change / 365 + " y"
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const myImage = useMemo(() => cld.image(post.content.publicId).resize(fill().width(1600)).delivery(format(fAuto())).delivery(quality(qAuto())).toURL(), [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const myAvatar = useMemo(() => cld.image(post.author.avatar?.publicId).resize(fill().width(200)).delivery(format(fAuto())).delivery(quality(qAuto())).toURL(), [])
 
 
