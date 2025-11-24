@@ -145,7 +145,7 @@
 
 .metricsCountMobile {
     display: none;
-    border-top: .5px solid var(--clr-border-800);
+    border-top: .5px solid var(--clr-border-900);
     padding: 1rem;
     align-items: center;
     flex-grow: 1;
@@ -198,7 +198,7 @@
     }
 
     .notAdmin {
-        max-width: 30%;
+        width: 30%;
     }
 }
 
@@ -367,10 +367,14 @@
     }
 
     .mainContentNav {
-        border-bottom: .5px solid var(--clr-border-800);
+        border-bottom: .5px solid var(--clr-border-900);
 
         >div:first-child {
             max-width: 60%;
+        }
+
+        .notAdmin {
+            width: 40%;
         }
     }
 
@@ -384,8 +388,21 @@
 
 
 @media (max-width:480px) {
-    .mainContentNav>div:first-child {
-        max-width: 80%;
+    .mainContentNav {
+
+        >div:first-child {
+            max-width: 80%;
+        }
+        .notAdmin{
+            width: 50%;
+        }
+
+    
+    }
+
+
+    .profile {
+        padding-top: .5rem;
     }
 
     .avatarArea {

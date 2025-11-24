@@ -9,7 +9,7 @@ import { auto as fAuto } from '@cloudinary/url-gen/qualifiers/format'
 import { auto as qAuto } from '@cloudinary/url-gen/qualifiers/quality'
 import cld from '../../libs/cloudinary';
 import { fill } from '@cloudinary/url-gen/actions/resize';
-import { AdvancedImage } from '@cloudinary/react'
+import { AdvancedImage, lazyload, placeholder } from '@cloudinary/react'
 
 
 const Post = ({ post }) => {
@@ -32,7 +32,10 @@ const Post = ({ post }) => {
         <article className={styles.post}>
 
             <div className={styles.postHeader}>
-                <AdvancedImage cldImg={myAvatar} alt="avatar" />
+                <AdvancedImage cldImg={myAvatar} alt="avatar" plugins={[
+                    // Show low res blurred img till it loads
+                    placeholder({ mode: 'blur' }),
+                ]} />
                 <h2>{post.author?.username}</h2>
                 <span>{postAge}</span>
                 <button className={styles.moreOptions}><Ellipsis size={20} /></button>
@@ -40,7 +43,12 @@ const Post = ({ post }) => {
 
             <div className={styles.postContentWrapper}>
                 <picture>
-                    <AdvancedImage className={styles.postContent} cldImg={myImage} alt="postContent" />
+                    <AdvancedImage className={styles.postContent} cldImg={myImage} alt="postContent"
+                        plugins={[
+                            // Show low res blurred img till it loads
+                            placeholder({ mode: 'blur' }),
+                        ]}
+                    />
                 </picture>
 
             </div>

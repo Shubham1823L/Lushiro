@@ -3,11 +3,13 @@
     position: fixed;
     background-color: black;
     bottom: 0;
+    left: 0;
+    z-index: 6;
     display: flex;
     justify-content: center;
     align-items: center;
     padding: .5rem;
-    border-top: .5px solid var(--clr-border-600);
+    border-top: .5px solid var(--clr-border-900);
 }
 
 .list {
@@ -37,11 +39,47 @@
     }
 }
 
+.searchItem:focus-within {
+    .searchMenuWrapper {
+        translate: 0;
+        visibility: visible;
+    }
+}
+
 .avatar {
     height: 100%;
     width: 100%;
     object-fit: cover;
 }
+
+
+.searchMenuWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: .5rem;
+    background-color: black;
+    height: calc(100vh - 28px - 1rem);
+    height: calc(100dvh - 28px - 1rem);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    width: 100dvw;
+    transition: all .2s cubic-bezier(0.54, 1.15, 1, 0.99);
+    visibility: hidden;
+    translate: 200% 0;
+}
+
+
+
+
+
+
+
+
+
+
 
 
 

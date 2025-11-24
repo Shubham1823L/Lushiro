@@ -7,6 +7,9 @@
     margin-left: auto;
     height: 100%;
     overflow-y: auto;
+    &::-webkit-scrollbar{
+        display: none;
+    }
 
     >* {
         padding-top: 1.5rem;

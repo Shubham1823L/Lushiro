@@ -56,7 +56,7 @@ const Profile = () => {
 
     return (
         <>
-            {loading ? <LoadingPage /> : <div className={styles.wrapper}>
+            {!loading && <div className={styles.wrapper}>
 
                 <div className={styles.hero}>
                     <div className={styles.profile}>

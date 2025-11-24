@@ -198,6 +198,7 @@
         }
 
         &:last-child {
+            width: min-content;
             right: .5rem;
             display: none;
         }
@@ -258,6 +259,7 @@
 .emptySearchQuery {
     border-top: 1px solid var(--clr-border-800);
     padding-block: 1.2rem;
+
 }
 
 .searchResultsHeader {
@@ -271,7 +273,7 @@
 
     button {
         color: var(--clr-primary-600);
-
+        max-width: fit-content;
     }
 }
 
@@ -279,6 +281,7 @@
 .searchResults {
     display: flex;
     flex-direction: column;
+
 }
 
 .searchResult {
@@ -629,7 +632,7 @@
 
 @media(width<1290px) {
     .sidebarWrapper {
-        
+
         .sidebar {
             width: calc(80px - 1.6rem);
         }
@@ -648,7 +651,7 @@
 
 
 @media (width<=768px) {
-    .sidebarWrapper{
+    .sidebarWrapper {
         display: none;
     }
 }

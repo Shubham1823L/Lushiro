@@ -4,14 +4,13 @@
     position: fixed;
     top: 0;
     display: flex;
+    z-index: 5;
     justify-content: flex-end;
     align-items: center;
     gap: 1rem;
     padding: 1rem 1rem;
+    border-bottom: .5px solid var(--clr-border-900);
     background-color: black;
-
-
-
 }
 
 
