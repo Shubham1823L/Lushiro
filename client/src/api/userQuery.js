@@ -20,3 +20,14 @@ export const fetchUserfromAPI = async (username) => {
         return error.response
     }
 }
+
+
+export const fetchRecentChatsfromAPI = async (userId) => {
+    try {
+        const response = await api.get(`/messages/getRecentChats/${userId}`)
+        return response
+    } catch (error) {
+        console.error("Error occured while fetching recent chats",error)
+        return error.response
+    }
+}

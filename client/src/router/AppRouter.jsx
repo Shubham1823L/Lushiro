@@ -36,7 +36,7 @@ export default function AppRouter() {
                     <Route path='/explore' element={<Troll />} />
                     <Route path='/messages' element={<Messages />} >
                         <Route index element={<StartNewChat />} />
-                        <Route path=':username' element={<ChatArea />} />
+                        <Route path=':username' element={<ChatArea/>}/>
                     </Route>
                     <Route path='/:username' element={<Profile />} >
                         <Route index element={<Posts />} />

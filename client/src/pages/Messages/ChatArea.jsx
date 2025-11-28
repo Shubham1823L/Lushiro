@@ -1,30 +1,88 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import styles from './messages.module.css'
-import { Link, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import { fetchUserfromAPI } from '../../api/userQuery'
 import { Info, SendHorizontal, Smile } from 'lucide-react'
-import { useAuth } from '../../hooks/useAuth'
+import io from 'socket.io-client'
 import clsx from 'clsx'
+import { useAuth } from '../../hooks/useAuth'
+import { fetchMessagesfromAPI } from '../../api/messageQuery'
+
+const socket = io.connect(import.meta.env.VITE_API_BASE_URL)
+
 
 const ChatArea = () => {
     const { username } = useParams()
-    const [user, setUser] = useState(null)
+    const { user } = useAuth()
+    const [receiver, setReceiver] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [roomId, setRoomId] = useState("")
+
+    const [message, setMessage] = useState("")
+    const [messages, setMessages] = useState([])
+    const messagesRef = useRef()
+
 
     useEffect(() => {
+        if (!roomId) return
+        (async () => {
+            const { status, data } = await fetchMessagesfromAPI(roomId)
+            if (status == 500) return console.error("internal error trying to fetch initial messages")
+            if (status == 200) {
+                setMessages(data.data.messages)
+            }
+
+        })().then(() => setLoading(false))
+
+
+    }, [roomId])
+
+
+    useEffect(() => {
+        if (!username) return
         (async () => {
             const { status, data } = await fetchUserfromAPI(username)
 
             if (status == 500) return console.error("Error fetching user data")
             if (status == 200) {
-                setUser(data.data.user)
-                console.log(data.data.user)
+                setReceiver(data.data.user)
+                const sortedIds = [user._id, data.data.user._id].sort()
+                const roomId = sortedIds.join("|")
+                setRoomId(roomId)
+                joinRoom(roomId)
             }
-        })().then(() => setLoading(false))
-
+        })()
 
 
     }, [username])
+
+    const sendMessage = async () => {
+        if (!message) return
+        socket.emit("SEND_MESSAGE", {
+            message, roomId, userId: user._id
+        }, (res) => {
+            if (!res.success) return console.log("Error trying to send message")
+            setMessages(prev => [...prev, res.message])
+        })
+
+        setMessage("")
+    }
+
+    useEffect(() => {
+        socket.on("RECEIVE_MESSAGE", (data) => {
+            setMessages(prev => [...prev, data.message])
+        })
+
+    }, [socket])
+
+
+
+    const joinRoom = (roomId) => {
+        if (!roomId) return console.log("Empty/Invalid RoomId")
+        socket.emit("JOIN_ROOM", {
+            roomId, userId: user._id
+        })
+    }
 
 
     return (
@@ -32,28 +90,35 @@ const ChatArea = () => {
             {!loading && <>
                 <div className={styles.chatHeader}>
                     <div>
-                        <img src={user.avatar?.secureUrl || "defaultAvatar.jpeg"} alt="" />
-                        {user.fullName}
+                        <img src={receiver.avatar?.secureUrl || "defaultAvatar.jpeg"} alt="" />
+                        {receiver.fullName}
                     </div>
                     <Info size={"2rem"} />
 
                 </div>
                 <div className={styles.hero}>
 
-                    <div className={styles.messages}>
-                        
-                        <div className={clsx(styles.message,styles.receivedMessage)}>
-                            lorem19
-                        </div>
-                        <div className={clsx(styles.message,styles.sentMessage)}>
-                            Yo!
-                        </div>
+                    <div ref={messagesRef} className={styles.messages}>
+
+                        {
+                            messages.map(msg => {
+                                return (
+                                    <div key={msg._id} className={clsx(styles.message, msg.senderId == user._id ? styles.sentMessage : styles.receivedMessage)}>{msg.text}</div>
+                                )
+                            })
+                        }
+
                     </div>
 
                     <div className={styles.messageInputWrapper}>
-                        <input name='messageInput' placeholder='Type your message' type="text" className={styles.messageInput} />
-                        <Smile size={28} />
-                        <SendHorizontal size={28} />
+                        <input onKeyDown={(e) => e.key == "Enter" && sendMessage()} value={message} onChange={(e) => setMessage(e.target.value)} name='messageInput' placeholder='Type your message' type="text" className={styles.messageInput} />
+                        <button>
+                            <Smile size={28} />
+                        </button>
+                        <button onClick={sendMessage}>
+                            <SendHorizontal size={28} />
+                        </button>
+
                     </div>
 
                 </div>

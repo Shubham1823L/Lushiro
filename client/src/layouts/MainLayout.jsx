@@ -19,7 +19,6 @@ const MainLayout = () => {
         if (location.pathname.startsWith("/messages")) {
             setShowFooter(false)
         }
-        console.log(location.pathname)
     }, [location.pathname])
 
 
