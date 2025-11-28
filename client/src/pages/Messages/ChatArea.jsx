@@ -8,7 +8,7 @@ import clsx from 'clsx'
 import { useAuth } from '../../hooks/useAuth'
 import { fetchMessagesfromAPI } from '../../api/messageQuery'
 
-const socket = io.connect(import.meta.env.VITE_API_BASE_URL)
+const socket = io.connect(import.meta.env.VITE_API_BASE_URL || window.location.hostname)
 
 
 const ChatArea = () => {
