@@ -32,3 +32,5 @@ export const getUsers = async (req, res) => {
 
     return res.success(200, { users })
 }
+
+

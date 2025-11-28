@@ -77,12 +77,12 @@ const Sidebar = ({ setMyPosts, createNewPostRef, showCreateNewPostDialog }) => {
                         </SidebarNavLink>
                     </li> */}
                     <li className={styles.listItem}>
-                        <SidebarNavLink to={"/pupu"}>
+                        <SidebarNavLink to={"/messages"}>
                             <div>
-                                {/* <PiPaperPlaneTiltBold size={26} /> */}
-                                <HardHat size={28} />
+                                <PiPaperPlaneTiltBold size={28} />
+                                {/* <HardHat size={28} /> */}
                             </div>
-                            <span className={styles.listItemText}>Coming Soon!</span>
+                            <span className={styles.listItemText}>Messages</span>
                         </SidebarNavLink>
                     </li>
                     <li className={styles.listItem}>

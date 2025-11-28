@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useAuth } from '../hooks/useAuth'
 import mitt from 'mitt'
-const baseUrl = import.meta.env.VITE_API_BASE_URL || "/api"
+const baseUrl = import.meta.env.VITE_API_BASE_URL+"/api" || "/api"
 
 export const apiEvents = mitt()
 

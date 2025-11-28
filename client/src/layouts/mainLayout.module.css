@@ -18,10 +18,6 @@
     }
 }
 
-.smallChildrenWidth>*:first-child {
-    max-width: 935px;
-}
-
 
 
 @media(width>1920px) {

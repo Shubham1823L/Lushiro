@@ -12,6 +12,9 @@ import Saved from '../pages/Profile/Saved'
 import Tagged from '../pages/Profile/Tagged'
 import Troll from '../pages/Troll/Troll'
 import NotFoundPage from '../pages/Extras/NotFoundPage'
+import Messages from '../pages/Messages/Messages'
+import StartNewChat from '../pages/Messages/StartNewChat'
+import ChatArea from '../pages/Messages/ChatArea'
 
 
 export default function AppRouter() {
@@ -31,6 +34,10 @@ export default function AppRouter() {
                 <Route element={<MainLayout />}>
                     <Route path='/' element={<Home />} />
                     <Route path='/explore' element={<Troll />} />
+                    <Route path='/messages' element={<Messages />} >
+                        <Route index element={<StartNewChat />} />
+                        <Route path=':username' element={<ChatArea/>}/>
+                    </Route>
                     <Route path='/:username' element={<Profile />} >
                         <Route index element={<Posts />} />
                         <Route path='saved' element={<Saved />} />
