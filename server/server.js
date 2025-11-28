@@ -61,15 +61,17 @@ if (env.MODE === "development") {
 
 app.use(responseHandler)
 
-app.use('/api/auth', authRoutes)
-app.use('/api/profile', profileRoutes)
-app.use('/api', followRoutes)
-app.use('/api/posts', postRoutes)
-app.use('/api/postInteractions/:id', postInteractionRoutes)
-app.use('/api/upload', uploadRoutes)
-app.use('/api/validate', validationRoutes)
-app.use('/api/users', userRoutes)
-app.use('/api/messages', messageRoutes)
+const API_PREFIX = env.MODE == "development" ? "/api" : ""
+
+app.use(`${API_PREFIX}/auth`, authRoutes)
+app.use(`${API_PREFIX}/profile`, profileRoutes)
+app.use(`${API_PREFIX}`, followRoutes)
+app.use(`${API_PREFIX}/posts`, postRoutes)
+app.use(`${API_PREFIX}/postInteractions/:id`, postInteractionRoutes)
+app.use(`${API_PREFIX}/upload`, uploadRoutes)
+app.use(`${API_PREFIX}/validate`, validationRoutes)
+app.use(`${API_PREFIX}/users`, userRoutes)
+app.use(`${API_PREFIX}/messages`, messageRoutes)
 
 app.use(errorHandler)
 
