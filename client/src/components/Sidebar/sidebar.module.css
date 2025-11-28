@@ -131,7 +131,6 @@
 
 
 .openSearchMenu {
-    border: none;
 
     .sidebar {
         width: calc(80px - 1.6rem);

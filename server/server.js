@@ -1,4 +1,6 @@
 import express from 'express'
+import http from 'http'
+import { Server } from 'socket.io'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 
@@ -17,6 +19,16 @@ import errorHandler from './middlewares/errorHandler.js'
 import responseHandler from './utils/responseHandler.js'
 
 const app = express()
+const server = http.createServer(app)
+const io = new Server(server, () => {
+    if (env.MODE === "development") {
+        cors({
+            origin: env.CLIENT_URL,
+            credentials: true,
+            methods: ["GET", "POST"]
+        })
+    }
+})
 
 app.use(cookieParser())
 app.use(express.json())
@@ -43,4 +55,7 @@ app.use('/api/users', userRoutes)
 app.use(errorHandler)
 
 connectDB()
-app.listen(env.PORT || 3000, "0.0.0.0")
+// app.listen(env.PORT || 3000, "0.0.0.0")
+server.listen(env.PORT || 3000, "0.0.0.0", () => {
+    console.log(`Listening on port ${env.PORT || 3000}`)
+})
