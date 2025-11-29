@@ -22,14 +22,7 @@ import Message from './models/Message.js'
 
 const app = express()
 const server = http.createServer(app)
-const io = new Server(server, {
-    cors: {
-        origin: env.CLIENT_URL,
-        credentials: true,
-        methods: ["GET", "POST"]
-
-    }
-})
+const io = new Server(server)
 
 
 io.on('connection', (socket) => {
@@ -61,22 +54,20 @@ if (env.MODE === "development") {
 
 app.use(responseHandler)
 
-const API_PREFIX = env.MODE == "development" ? "/api" : ""
-
-app.use(`${API_PREFIX}/auth`, authRoutes)
-app.use(`${API_PREFIX}/profile`, profileRoutes)
-app.use(`${API_PREFIX}`, followRoutes)
-app.use(`${API_PREFIX}/posts`, postRoutes)
-app.use(`${API_PREFIX}/postInteractions/:id`, postInteractionRoutes)
-app.use(`${API_PREFIX}/upload`, uploadRoutes)
-app.use(`${API_PREFIX}/validate`, validationRoutes)
-app.use(`${API_PREFIX}/users`, userRoutes)
-app.use(`${API_PREFIX}/messages`, messageRoutes)
+app.use('/api/auth', authRoutes)
+app.use('/api/profile', profileRoutes)
+app.use('/api', followRoutes)
+app.use('/api/posts', postRoutes)
+app.use('/api/postInteractions/:id', postInteractionRoutes)
+app.use('/api/upload', uploadRoutes)
+app.use('/api/validate', validationRoutes)
+app.use('/api/users', userRoutes)
+app.use('/api/messages', messageRoutes)
 
 app.use(errorHandler)
 
 connectDB()
-// app.listen(env.PORT || 3000, "0.0.0.0")
+
 server.listen(env.PORT || 3000, "0.0.0.0", () => {
     console.log(`Listening on port ${env.PORT || 3000}`)
 })
