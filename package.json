@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "concurrently \"cd server && nodemon server.js\" \"cd client && npm run dev\""
+    "dev": "concurrently \"cd server && nodemon server.js\" \"cd client && npm run dev\"",
+    "stage":"docker compose -f compose.dev.yaml up --build -d"
   },
   "keywords": [],
   "author": "",
