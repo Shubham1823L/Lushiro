@@ -160,20 +160,23 @@
     padding: .5rem;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: .5rem;
 }
 
 .messages {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 1rem;
     max-height: calc(100vh - 2.5rem - 130px);
     overflow-y: auto;
-    &::-webkit-scrollbar{
+    scroll-behavior: smooth;
+
+    &::-webkit-scrollbar {
         display: none;
     }
 }
+
 
 .message {
     text-align: justify;
@@ -190,7 +193,7 @@
 
 .sentMessage {
     align-self: end;
-    background-color: rgb(0, 110, 255);
+    background-color: var(--clr-blue-700);
 }
 
 .messageInputWrapper {
@@ -199,8 +202,9 @@
     border-radius: 10px;
     display: flex;
     gap: .2rem;
+    position: relative;
 
-    >button {
+    >button:not(:last-child) {
         box-sizing: content-box;
         border-radius: 8px;
         padding: .3rem .5rem;
@@ -218,5 +222,45 @@
     box-sizing: border-box;
     font-size: 14px;
     width: 100%;
+
+}
+
+.scrollToBottomBtn {
+    --dim: 2.5rem;
+    position: absolute;
+    background-color: hsl(from var(--clr-neutral-700) h s l / .5);
+    backdrop-filter: blur(5px);
+    border-radius: 50%;
+    height: var(--dim);
+    width: var(--dim);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid white;
+    top: -50px;
+    right: 0;
+
+    &:active {
+        scale: .95;
+    }
+
+}
+
+.unreadCounter {
+    --dim: 50%;
+    height: var(--dim);
+    width: var(--dim);
+    right: 0;
+    top: -10px;
+    position: absolute;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: hsl(from var(--clr-blue-700) h 100% 55% );
+    color: white;
+    font-family: sans-serif;
+
 
 }
