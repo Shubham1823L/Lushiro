@@ -32,7 +32,10 @@ const ChatArea = () => {
     const [isIntersecting, setIsIntersecting] = useState(true)
 
     const observer = new IntersectionObserver((e) => {
-        if (e[0].isIntersecting) setIsIntersecting(true)
+        if (e[0].isIntersecting) {
+            setIsIntersecting(true)
+            setUnReadCounter(0)
+        }
         else setIsIntersecting(false)
     })
 
