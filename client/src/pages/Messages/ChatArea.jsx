@@ -11,6 +11,7 @@ import genImage from '../../utils/cldImage'
 
 
 
+
 const socket = io.connect()
 
 
@@ -23,11 +24,17 @@ const ChatArea = () => {
 
     const [scrollHeight, setScrollHeight] = useState(null)
     const [lastMessage, setLastMessage] = useState("")
-    const lastMessageRef = useRef()
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState([])
     const messagesRef = useRef()
     const [unReadCounter, setUnReadCounter] = useState(0)
+    const lastMessageRef = useRef()
+    const [isIntersecting, setIsIntersecting] = useState(true)
+
+    const observer = new IntersectionObserver((e) => {
+        if (e[0].isIntersecting) setIsIntersecting(true)
+        else setIsIntersecting(false)
+    })
 
 
     useEffect(() => {
@@ -63,6 +70,9 @@ const ChatArea = () => {
         if (!scrollHeight && messagesRef.current) {
             setScrollHeight(messagesRef.current.scrollHeight)
             messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+        }
+        if (lastMessageRef.current) {
+            observer.observe(lastMessageRef.current)
         }
 
     }, [messages])
@@ -139,7 +149,7 @@ const ChatArea = () => {
                         {
                             messages.map((msg, i, arr) => {
                                 return (
-                                    <div ref={arr.length - 1 === i ? lastMessageRef : null} data-type={msg.senderId == user._id ? "sent" : "received"} key={msg._id} className={clsx(styles.message, msg.senderId == user._id ? styles.sentMessage : styles.receivedMessage)}>{msg.text}</div>
+                                    <div ref={arr.length - 1 == i ? lastMessageRef : null} key={msg._id} className={clsx(styles.message, msg.senderId == user._id ? styles.sentMessage : styles.receivedMessage)}>{msg.text}</div>
                                 )
                             })
                         }
@@ -154,10 +164,11 @@ const ChatArea = () => {
                         <button onClick={sendMessage}>
                             <SendHorizontal size={28} />
                         </button>
-                        <button className={styles.scrollToBottomBtn} onClick={scrollToBottom}>
-                            <div className={styles.unreadCounter}>{unReadCounter}</div>
+                        {!isIntersecting && <button className={styles.scrollToBottomBtn} onClick={scrollToBottom}>
+                            {unReadCounter > 0 && <div className={styles.unReadCounter}>{unReadCounter}</div>}
                             <ChevronDown size={28} color='white' />
-                        </button>
+                        </button>}
+
                     </div>
 
                 </div>

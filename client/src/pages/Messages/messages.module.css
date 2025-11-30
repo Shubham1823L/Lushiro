@@ -247,7 +247,7 @@
 
 }
 
-.unreadCounter {
+.unReadCounter {
     --dim: 50%;
     height: var(--dim);
     width: var(--dim);
