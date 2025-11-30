@@ -42,6 +42,9 @@ export const getRecentChats = async (req, res) => {
             $replaceWith: "$lastMessage"
         },
         {
+            $sort: { createdAt: -1 }
+        },
+        {
             $lookup: {
                 from: "users",
                 localField: "senderId",
