@@ -167,12 +167,13 @@ const ChatArea = () => {
                         <button onClick={sendMessage}>
                             <SendHorizontal size={28} />
                         </button>
-                        {!isIntersecting && <button className={styles.scrollToBottomBtn} onClick={scrollToBottom}>
+                         <button className={clsx(styles.scrollToBottomBtn,isIntersecting && styles.hideBtn)} onClick={scrollToBottom}>
                             {unReadCounter > 0 && <div className={styles.unReadCounter}>{unReadCounter}</div>}
                             <ChevronDown size={28} color='white' />
-                        </button>}
+                        </button>
 
                     </div>
+                    
 
                 </div>
 

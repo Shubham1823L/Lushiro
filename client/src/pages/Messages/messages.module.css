@@ -240,11 +240,17 @@
     border: 2px solid white;
     top: -50px;
     right: 0;
+    opacity: 1;
+    transition: all .3s linear;
 
     &:active {
         scale: .95;
     }
 
+}
+
+.hideBtn {
+    opacity: 0;
 }
 
 .unReadCounter {
@@ -253,14 +259,14 @@
     width: var(--dim);
     right: 0;
     top: -10px;
-    position: absolute;
     border-radius: 50%;
+
+    position: absolute;
     display: flex;
     justify-content: center;
     align-content: center;
-    background-color: hsl(from var(--clr-blue-700) h 100% 55% );
+
+    background-color: hsl(from var(--clr-blue-700) h 100% 55%);
     color: white;
     font-family: sans-serif;
-
-
 }
