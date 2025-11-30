@@ -2,11 +2,15 @@ import React, { useEffect, useRef, useState } from 'react'
 import styles from './messages.module.css'
 import { useParams } from 'react-router-dom'
 import { fetchUserfromAPI } from '../../api/userQuery'
-import { Info, SendHorizontal, Smile } from 'lucide-react'
+import { ChevronDown, Info, SendHorizontal, Smile } from 'lucide-react'
 import io from 'socket.io-client'
 import clsx from 'clsx'
 import { useAuth } from '../../hooks/useAuth'
 import { fetchMessagesfromAPI } from '../../api/messageQuery'
+import genImage from '../../utils/cldImage'
+
+
+
 
 const socket = io.connect()
 
@@ -18,9 +22,37 @@ const ChatArea = () => {
     const [loading, setLoading] = useState(true)
     const [roomId, setRoomId] = useState("")
 
+    const [scrollHeight, setScrollHeight] = useState(null)
+    const [lastMessage, setLastMessage] = useState("")
     const [message, setMessage] = useState("")
     const [messages, setMessages] = useState([])
     const messagesRef = useRef()
+    const [unReadCounter, setUnReadCounter] = useState(0)
+    const lastMessageRef = useRef()
+    const [isIntersecting, setIsIntersecting] = useState(true)
+
+    const observer = new IntersectionObserver((e) => {
+        if (e[0].isIntersecting) {
+            setIsIntersecting(true)
+            setUnReadCounter(0)
+        }
+        else setIsIntersecting(false)
+    })
+
+
+    useEffect(() => {
+
+        const container = messagesRef.current
+        if (!container) return
+
+        setScrollHeight(container.scrollHeight)
+        const range = Math.abs(Math.round(container.scrollTop) - (scrollHeight - container.clientHeight))
+        if (lastMessage.senderId != user._id && range > 2) return setUnReadCounter(count => count + 1)
+
+        scrollToBottom()
+
+
+    }, [lastMessage])
 
 
     useEffect(() => {
@@ -37,6 +69,21 @@ const ChatArea = () => {
 
     }, [roomId])
 
+    useEffect(() => {
+        if (!scrollHeight && messagesRef.current) {
+            setScrollHeight(messagesRef.current.scrollHeight)
+            messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+        }
+        if (lastMessageRef.current) {
+            observer.observe(lastMessageRef.current)
+        }
+
+    }, [messages])
+
+    const scrollToBottom = () => {
+        setUnReadCounter(0)
+        messagesRef.current.scrollTop = messagesRef.current.scrollHeight
+    }
 
     useEffect(() => {
         if (!username) return
@@ -63,6 +110,7 @@ const ChatArea = () => {
         }, (res) => {
             if (!res.success) return console.log("Error trying to send message")
             setMessages(prev => [...prev, res.message])
+            setLastMessage(res.message)
         })
 
         setMessage("")
@@ -71,6 +119,7 @@ const ChatArea = () => {
     useEffect(() => {
         socket.on("RECEIVE_MESSAGE", (data) => {
             setMessages(prev => [...prev, data.message])
+            setLastMessage(data.message)
         })
 
     }, [socket])
@@ -90,7 +139,7 @@ const ChatArea = () => {
             {!loading && <>
                 <div className={styles.chatHeader}>
                     <div>
-                        <img src={receiver.avatar?.secureUrl || "defaultAvatar.jpeg"} alt="" />
+                        <img src={receiver.avatar.publicId ? genImage(receiver.avatar.publicId, 200).toURL() : "defaultAvatar.jpeg"} alt="avatar" />
                         {receiver.fullName}
                     </div>
                     <Info size={"2rem"} />
@@ -101,9 +150,9 @@ const ChatArea = () => {
                     <div ref={messagesRef} className={styles.messages}>
 
                         {
-                            messages.map(msg => {
+                            messages.map((msg, i, arr) => {
                                 return (
-                                    <div key={msg._id} className={clsx(styles.message, msg.senderId == user._id ? styles.sentMessage : styles.receivedMessage)}>{msg.text}</div>
+                                    <div ref={arr.length - 1 == i ? lastMessageRef : null} key={msg._id} className={clsx(styles.message, msg.senderId == user._id ? styles.sentMessage : styles.receivedMessage)}>{msg.text}</div>
                                 )
                             })
                         }
@@ -118,12 +167,18 @@ const ChatArea = () => {
                         <button onClick={sendMessage}>
                             <SendHorizontal size={28} />
                         </button>
+                         <button className={clsx(styles.scrollToBottomBtn,isIntersecting && styles.hideBtn)} onClick={scrollToBottom}>
+                            {unReadCounter > 0 && <div className={styles.unReadCounter}>{unReadCounter}</div>}
+                            <ChevronDown size={28} color='white' />
+                        </button>
 
                     </div>
+                    
 
                 </div>
+
             </>}
-        </div>
+        </div >
     )
 }
 
