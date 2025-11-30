@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { AuthContext } from './../hooks/useAuth'
 import LoadingPage from '../pages/Extras/LoadingPage'
 import { unAuthApi } from '../api/axios'
+import { socket } from '../utils/socket'
 
 
 export const AuthProvider = ({ children }) => {
@@ -16,6 +17,8 @@ export const AuthProvider = ({ children }) => {
                 const { data: { accessToken, user } } = response.data
                 setToken(accessToken)
                 setUser(user)
+                socket.connect()
+
             } catch (error) {
                 if (error.response.status === 401) console.log("New Session")
                 // return toast("Something went wrong, please refresh")
@@ -29,7 +32,9 @@ export const AuthProvider = ({ children }) => {
             }, 1500);
 
         })
-
+        return () => {
+            socket.disconnect()
+        }
     }, [])
 
     const updateToken = (token) => setToken(token)

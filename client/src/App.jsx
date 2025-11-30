@@ -5,10 +5,13 @@ import { useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import LoadingBar from 'react-top-loading-bar'
 
+
+
 function App() {
   useAxiosInterceptors()
   const location = useLocation()
   const ref = useRef(null)
+
 
   useEffect(() => {
     const start = () => ref.current.continuousStart()
@@ -22,6 +25,8 @@ function App() {
     }
 
   }, [location.pathname])
+
+
 
   return (
     <>

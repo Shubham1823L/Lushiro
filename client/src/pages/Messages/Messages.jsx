@@ -5,6 +5,8 @@ import SearchResults from './SearchResults.jsx'
 import { Outlet } from 'react-router-dom'
 import RecentChats from './RecentChats.jsx'
 
+
+
 const Messages = () => {
   const [searchQuery, setSearchQuery] = useState("")
 

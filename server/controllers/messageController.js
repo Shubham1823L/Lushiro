@@ -33,7 +33,13 @@ export const getRecentChats = async (req, res) => {
             $sort: { createdAt: -1 }
         },
         {
-            $limit: 1
+            $group: {
+                _id: "$roomId",
+                lastMessage: { $first: "$$ROOT" }
+            }
+        },
+        {
+            $replaceWith: "$lastMessage"
         },
         {
             $lookup: {
@@ -44,37 +50,37 @@ export const getRecentChats = async (req, res) => {
             }
         },
         {
-            $lookup:{
-                from:"users",
-                localField:"receiverId",
-                foreignField:"_id",
-                as:"receiver"
+            $lookup: {
+                from: "users",
+                localField: "receiverId",
+                foreignField: "_id",
+                as: "receiver"
             }
         },
         {
             $unwind: "$sender"
         },
         {
-            $unwind:"$receiver"
+            $unwind: "$receiver"
         },
         {
             $project: {
-                roomId:1,
-                senderId:1,
-                text:1,
-                sender:{
-                    fullName:1,
-                    avatar:1,
-                    username:1,
+                roomId: 1,
+                senderId: 1,
+                text: 1,
+                sender: {
+                    fullName: 1,
+                    avatar: 1,
+                    username: 1,
                 },
-                receiver:{
-                    avatar:1,
-                    username:1,
+                receiver: {
+                    avatar: 1,
+                    username: 1,
                 }
             }
         }
     ])
 
-    res.success(200,{chats})
+    res.success(200, { chats })
 }
 
