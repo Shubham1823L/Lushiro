@@ -30,6 +30,7 @@ services:
       - "1823"
     volumes:
       - ./server:/app:ro
+      - ./server/uploads:/app/uploads:rw
     env_file:
       - ./server/.env
     networks:

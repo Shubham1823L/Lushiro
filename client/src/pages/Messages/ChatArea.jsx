@@ -3,19 +3,15 @@ import styles from './messages.module.css'
 import { useParams } from 'react-router-dom'
 import { fetchUserfromAPI } from '../../api/userQuery'
 import { ChevronDown, Info, SendHorizontal, Smile } from 'lucide-react'
-import io from 'socket.io-client'
 import clsx from 'clsx'
 import { useAuth } from '../../hooks/useAuth'
 import { fetchMessagesfromAPI } from '../../api/messageQuery'
 import genImage from '../../utils/cldImage'
-
-
-
-
-const socket = io.connect()
+import { socket } from '../../utils/socket'
 
 
 const ChatArea = () => {
+
     const { username } = useParams()
     const { user } = useAuth()
     const [receiver, setReceiver] = useState(null)
@@ -167,13 +163,13 @@ const ChatArea = () => {
                         <button onClick={sendMessage}>
                             <SendHorizontal size={28} />
                         </button>
-                         <button className={clsx(styles.scrollToBottomBtn,isIntersecting && styles.hideBtn)} onClick={scrollToBottom}>
+                        <button className={clsx(styles.scrollToBottomBtn, isIntersecting && styles.hideBtn)} onClick={scrollToBottom}>
                             {unReadCounter > 0 && <div className={styles.unReadCounter}>{unReadCounter}</div>}
                             <ChevronDown size={28} color='white' />
                         </button>
 
                     </div>
-                    
+
 
                 </div>
 
