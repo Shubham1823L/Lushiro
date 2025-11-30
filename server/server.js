@@ -16,9 +16,12 @@ import uploadRoutes from './routes/uploadRoutes.js'
 import validationRoutes from './routes/validationRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import messageRoutes from './routes/messageRoutes.js'
+import oauthRoutes from './routes/oauthRoutes.js'
 import errorHandler from './middlewares/errorHandler.js'
 import responseHandler from './utils/responseHandler.js'
 import Message from './models/Message.js'
+
+
 
 const app = express()
 const server = http.createServer(app)
@@ -63,6 +66,7 @@ app.use('/api/upload', uploadRoutes)
 app.use('/api/validate', validationRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/messages', messageRoutes)
+app.use('/api/oauth', oauthRoutes)
 
 app.use(errorHandler)
 
