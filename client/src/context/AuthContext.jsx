@@ -27,10 +27,7 @@ export const AuthProvider = ({ children }) => {
 
         }
         refreshSession().then(() => {
-            setTimeout(() => {
-                setLoading(false)
-            }, 1500);
-
+            setLoading(false)
         })
         return () => {
             socket.disconnect()

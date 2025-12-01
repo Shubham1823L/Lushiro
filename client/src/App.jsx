@@ -1,4 +1,5 @@
 import './App.css'
+import './index.css'
 import AppRouter from './router/AppRouter'
 import { apiEvents, useAxiosInterceptors } from './api/axios'
 import { useEffect, useRef } from 'react'
