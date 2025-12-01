@@ -1,10 +1,13 @@
-import { ArcticFetchError, decodeIdToken, generateCodeVerifier, generateState, OAuth2RequestError } from 'arctic'
+import { ArcticFetchError, generateCodeVerifier, generateState, OAuth2RequestError } from 'arctic'
 import * as jose from 'jose'
 import env from '../config/env.js'
-import { google } from '../libs/oauth/google.js'
+import { github, google } from '../libs/oauth.js'
 import { generateRefreshToken } from '../utils/generateToken.js'
 import User from '../models/User.js'
 import { generateFromEmail } from 'unique-username-generator'
+import axios from 'axios'
+import e from 'express'
+
 
 export const redirectToGoogleOAuth = (req, res) => {
     const state = generateState()
@@ -86,4 +89,87 @@ export const googleOAuthCallback = async (req, res) => {
     //User does not exist
     await User.create({ email, fullName: name, providers: ["google"], username: randomUsername })
     return res.redirect("/")
+}
+
+
+export const redirectToGithubOAuth = (req, res) => {
+    const state = generateState()
+    const scopes = ["user:email", "read:user"]
+
+    const url = github.createAuthorizationURL(state, scopes)
+
+    res.cookie('githubState', state, env.OAUTH_COOKIE_OPTIONS)
+
+    res.redirect(url)
+}
+
+export const githubOAuthCallback = async (req, res) => {
+    const { state, code } = req.query
+    const { githubState } = req.cookies
+
+    const clearCookies = () => {
+        res.clearCookie('githubState', env.OAUTH_COOKIE_OPTIONS)
+    }
+
+    if (!state || !githubState) return res.fail(400, "BAD_REQUEST", "Invalid Request, some info was wrong")
+    if (state !== githubState) {
+        clearCookies()
+        return res.fail(400, "OAUTH_INVALID_STATE", "The github oauth state was invalid")
+    }
+
+    var tokens
+    try {
+        tokens = await github.validateAuthorizationCode(code)
+    } catch (err) {
+        if (err instanceof OAuth2RequestError) {
+            //Incorrect Authorization Code, credentials or redirect uri
+            clearCookies()
+            console.error("Github OAuth incorrect creds, code or redirect uri error", err.code)
+            return res.fail(400, "OAUTH_ERROR", "The github oauth code received was wrong")
+        }
+        if (err instanceof ArcticFetchError) {
+            console.error("Arctic fetch failed", err.cause)
+            return res.fail(500, "OAUTH_FETCH_ERROR", "Arctic github oatuh fetch failed")
+        }
+        console.error("Parsing error in github oauth", err)
+        return res.fail(500, "OAUTH_PARSE_ERROR", "Parsing error in github oauth")
+    }
+
+    clearCookies()
+
+    const githubAccessToken = tokens.accessToken()
+
+    const { data: githubUser } = await axios.get('https://api.github.com/user', {
+        headers: { Authorization: `Bearer ${githubAccessToken}` }
+    })
+    const { data: githubEmails } = await axios.get('https://api.github.com/user/emails', {
+        headers: { Authorization: `Bearer ${githubAccessToken}` }
+    })
+
+    const { login: githubUsername, name } = githubUser
+
+    const { email } = githubEmails.find(obj => obj.primary === true)
+
+
+
+    const refreshToken = generateRefreshToken(email)
+    res.cookie('refreshToken', refreshToken, env.COOKIE_OPTIONS)
+
+    if (await User.exists({ email })) {
+        await User.updateOne({ email }, { $addToSet: { providers: "github" } })
+        return res.redirect("/")
+    }
+
+    //User does not exist
+    var username
+    if (await User.exists({ username: githubUsername })) {
+        username = generateFromEmail(email, { randomDigits: 3, leadingFallback: "lushiro_user" })
+    }
+    else {
+        username = githubUsername
+    }
+
+    await User.create({ email, fullName: name, providers: ["github"], username: username })
+    return res.redirect("/")
+
 }

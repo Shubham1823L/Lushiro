@@ -2,3 +2,37 @@
     color: red;
     fill: red;
 }
+
+.githubButton {
+    color: hsl(0, 0%, 90%);
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 14.5px;
+    height: 38px;
+    border-radius: 10px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid hsl(0, 0%, 80%);
+    position: relative;
+
+
+
+    div {
+        margin-left: 30px;
+        flex: 1;
+        text-align: center;
+
+    }
+
+}
+
+.githubMark {
+    left: -2px;
+    top: 50%;
+    translate: 0 -50%;
+    position: absolute;
+    scale: .30;
+    height: min-content;
+    width: min-content;
+}

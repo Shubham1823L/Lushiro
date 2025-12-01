@@ -7,10 +7,11 @@ import clsx from 'clsx'
 import { useAuth } from '../../hooks/useAuth'
 import { fetchMessagesfromAPI } from '../../api/messageQuery'
 import genImage from '../../utils/cldImage'
-import { socket } from '../../utils/socket'
+import { useSocket } from '../../hooks/useSocket'
 
 
 const ChatArea = () => {
+    const socket = useSocket()
 
     const { username } = useParams()
     const { user } = useAuth()
