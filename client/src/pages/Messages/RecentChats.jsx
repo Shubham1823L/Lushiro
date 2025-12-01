@@ -40,7 +40,7 @@ const RecentChats = () => {
                             </div>
 
                             <div className={styles.searchedUserData}>
-                                <p className={styles.oneLineText}>{chat.sender.fullName}</p>
+                                <p className={styles.oneLineText}>{friendId == chat.senderId ? chat.sender.fullName : chat.receiver.fullName}</p>
                                 <div className={clsx(styles.extraUserDetails, styles.oneLineText)}>
                                     <p className={styles.oneLineText}>{chat.text}</p>
                                 </div>

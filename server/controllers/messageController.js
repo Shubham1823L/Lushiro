@@ -79,6 +79,7 @@ export const getRecentChats = async (req, res) => {
                 receiver: {
                     avatar: 1,
                     username: 1,
+                    fullName: 1,
                 }
             }
         }
