@@ -2,7 +2,7 @@ import { ArcticFetchError, decodeIdToken, generateCodeVerifier, generateState, O
 import * as jose from 'jose'
 import env from '../config/env.js'
 import { google } from '../libs/oauth/google.js'
-import { generateAccessToken, generateRefreshToken } from '../utils/generateToken.js'
+import { generateRefreshToken } from '../utils/generateToken.js'
 import User from '../models/User.js'
 import { generateFromEmail } from 'unique-username-generator'
 
@@ -11,7 +11,7 @@ export const redirectToGoogleOAuth = (req, res) => {
     const codeVerifier = generateCodeVerifier()
     const scopes = ["email", "openid", "profile"]
 
-    //url to which frontend will be redirect for google auth
+    //url to which frontend will be redirected for google auth
     const url = google.createAuthorizationURL(state, codeVerifier, scopes)
 
     res.cookie('googleState', state, env.OAUTH_COOKIE_OPTIONS)
@@ -74,7 +74,6 @@ export const googleOAuthCallback = async (req, res) => {
     }
     const { email, name } = decoded.payload
 
-    const accessToken = generateAccessToken(email)
     const refreshToken = generateRefreshToken(email)
     res.cookie('refreshToken', refreshToken, env.COOKIE_OPTIONS)
 
@@ -83,7 +82,7 @@ export const googleOAuthCallback = async (req, res) => {
         return res.redirect("/")
     }
 
-    const randomUsername = generateFromEmail(email, { randomDigits: 6, leadingFallback: "lushiro_user" })
+    const randomUsername = generateFromEmail(email, { randomDigits: 3, leadingFallback: "lushiro_user" })
     //User does not exist
     await User.create({ email, fullName: name, providers: ["google"], username: randomUsername })
     return res.redirect("/")
