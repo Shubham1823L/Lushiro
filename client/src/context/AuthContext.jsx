@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react'
 import { AuthContext } from './../hooks/useAuth'
 import LoadingPage from '../pages/Extras/LoadingPage'
 import { unAuthApi } from '../api/axios'
-import { socket } from '../utils/socket'
+import { io } from 'socket.io-client'
+import { SocketContext } from '../hooks/useSocket'
 
 
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [token, setToken] = useState(null)
     const [loading, setLoading] = useState(true)
+    const [socket, setSocket] = useState(null)
 
     useEffect(() => {
         const refreshSession = async () => {
@@ -17,7 +19,7 @@ export const AuthProvider = ({ children }) => {
                 const { data: { accessToken, user } } = response.data
                 setToken(accessToken)
                 setUser(user)
-                socket.connect()
+                setSocket(io.connect())
 
             } catch (error) {
                 if (error.response.status === 401) console.log("New Session")
@@ -43,7 +45,9 @@ export const AuthProvider = ({ children }) => {
             {
                 loading ? <LoadingPage /> :
                     <AuthContext.Provider value={value}>
-                        {children}
+                        <SocketContext.Provider value={socket}>
+                            {children}
+                        </SocketContext.Provider>
                     </AuthContext.Provider>
             }
         </>
